@@ -1308,7 +1308,7 @@ body:not([data-platform^="Mac"]) .sidebar::-webkit-scrollbar-thumb {
 }
 
 @supports (width: env(safe-area-inset)) {
-@	media only screen and (orientation: landscape) {
+    @media only screen and (orientation: landscape) {
 		.sidebar-nav,.sidebar nav{margin-left: calc(env(safe-area-inset-left) / 2);
 	}
 }}
@@ -1701,7 +1701,7 @@ body .sidebar {
 }
 
 @supports (width: env(safe-area-inset)) {
-@	media only screen and (orientation: landscape) {
+    @media only screen and (orientation: landscape) {
 		.sidebar .search input[type="search"]{margin-left: calc(env(safe-area-inset-left) / 2);
 	}
 }}
