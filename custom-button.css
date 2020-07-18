@@ -44,6 +44,7 @@ h2 {
 .color .blue   {background: #6698cb;}
 .color .purple {background: #cb99c5;}
 
+/* 
 .content, 
 .content-gradient, 
 .content-3d {
@@ -57,6 +58,8 @@ h2 {
   width: 50%;
   max-width: 300px;
 }
+ */
+
 pre {
 	width: 100%;
 	padding: 30px;

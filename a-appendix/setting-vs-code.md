@@ -42,13 +42,17 @@ Visual Studio Code（简称 VS Code）是功能非常丰富的一个开源现代
 
 ### 主题、图标、字体
 
-#### 主题
-
-VS Code 的应用商店中有着大量可以选择的扩展。
+VS Code 的应用商店中有着大量可以选择的扩展，主题和图标就是其中数目众多的两类，它们可以改变 VS Code 的“外貌”，让 VS Code 更适合具体用户的口味。
 
 和安装中文语言包一样，点击侧边的<button class="btn gray mini">扩展</button>按钮（快捷键 <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>X</kbd>）打开扩展面板，搜索“Theme”就能看到大量可选择的主题。
 
 ![][Visual_Studio_Code_Extensions_Theme] 
+
+点击面板中的主题名称，就可以看到主题的详细情况：
+
+![][Visual_Studio_Code_Extensions_Theme_Preview]
+
+这些搜索结果是按照用户评价的综合得分排列的，所以开头列出的这些都值得一试，话虽这样说，但挨个安装、切换、调试这些主题，也是件费时费力的事情
 
 <!-- 插图 -->
 
@@ -60,6 +64,11 @@ VS Code 的应用商店中有着大量可以选择的扩展。
 [Visual_Studio_Code_Extensions_Chinese_Language_Pack_Install]: https://raw.githubusercontent.com/shen-huang/img/master/2020-07/Visual_Studio_Code_Extensions_Chinese_Language_Pack_Install.png
 [Visual_Studio_Code_Chinese_Interface]: https://raw.githubusercontent.com/shen-huang/img/master/2020-07/Visual_Studio_Code_Chinese_Interface.png
 [Visual_Studio_Code_Extensions_Theme]: https://raw.githubusercontent.com/shen-huang/img/master/2020-07/Visual_Studio_Code_Extensions_Theme.png
+[Visual_Studio_Code_Extensions_Theme_Preview]: https://raw.githubusercontent.com/shen-huang/img/master/2020-07/Visual_Studio_Code_Extensions_Theme_Preview.png
+
+<!-- 
+https://raw.githubusercontent.com/shen-huang/img/master/2020-07/
+ -->
 
 <!-- 链接 -->
 

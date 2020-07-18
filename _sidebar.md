@@ -7,3 +7,4 @@
   * [设置 Visual Studio Code](a-appendix/setting-vs-code)
   * [设置文件夹](a-appendix/setting-folders.md)
   * [页面效果测试](a-appendix/style-tests.md)
+  * [随记](a-appendix/jotting.md)
