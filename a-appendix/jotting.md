@@ -2,6 +2,12 @@
 
 这里是一些我在学习过程中“注意力漂移”的记录。
 
+## 2020-07-22
+
+在搜索资料的时候撞进了 MegaEase 创始人陈皓的个人网站“[酷壳](https://coolshell.cn/)”（[CoolShell.cn](https://coolshell.cn/)），发现这是个颇有能力的人，他 2019 年 12 月 1 日的一篇文章[《别让自己“墙”了自己》](https://coolshell.cn/articles/20276.html)非常值得一读，另一篇写于 2019 年 11 月 3 日的[《UNIX 50 年：KEN THOMPSON 的密码》](https://coolshell.cn/articles/19996.html)也很有意思。
+
+[《如何写出无法维护的代码》（陈皓，2011-06-03）](https://coolshell.cn/articles/4758.html)很契合本次课程的学习，作为一篇“反面教材”，这篇文章里展现的种种行为可谓令人印象深刻。
+
 ## 2020-07-20
 
 2020 年 1 月 15 日，微软正式推出了以 Chromium 为内核的新版 Microsoft Edge。我想使用新版的 Edge，又不想就此抛弃 EdgeHTML 内核，就没有使用直接升级的办法，而是使用了 [PortableSoft][] 提供的基于启动器的 [Microsoft Edge 绿色版](https://www.portablesoft.org/microsoft-edge-portable/)（此处为最新版，过去的版本可以在“[Microsoft Edge 历史版本/旧版本下载](https://www.portablesoft.org/microsoft-edge-old-version/)”页面下载）。
@@ -159,13 +165,67 @@ git add . ; git commit -m"说明" ; git push origin master
 
 想好好给李骏老师的课程《进入编程世界》写个笔记，参考[《GitBook 教程（小白入坑 GitBook 全过程）》（Broken故城，2020-02-20）](https://www.jianshu.com/p/0388d8bb49a7)、[《GitBook 使用教程》（yulilong，2019-01-21）](https://segmentfault.com/a/1190000017960359)，在 GitBook 新建了一个“Space”，关联到了 GitHub 的仓库。
 
+## 2020-07-09
+
+## 2020-07-08
+
+了解了一下 Shell、Bash、Zsh 等概念，顺带明确了 <span class="paths">.bash_profile</span>、<span class="paths">.bashrc</span>、<span class="paths">.zshrc</span> 这几个文件的关系。考虑到很多同学可能并没有从 Bash 切换到 Zsh，我就暂时停在了 Bash，主要调整了 <span class="paths">.bash_profile</span> 文件，加入了代理和关闭 Zsh 升级提示的设置，打算明天再分享一次，附带说明一下怎么可以“一劳永逸”地解决 macOS 的 Terminal 的网络代理设置问题。
+
+编辑 <span class="paths">.bash_profile</span> 文件可能会遇到麻烦（很多文档都教读者用 VIM 来做这事，对初学者真的……不够友好），这事可以用 Visual Studio Code（下简称 VS Code）来做，在 Terminal 里输入并运行 `code ~/.bash_profile` 就能用 VS Code 打开这个文件了。如果因为种种原因，还没装 VS Code，则可以在 Terminal 里输入并运行 `open ~/.bash_profile`，这样会使用 macOS 自带的“文本编辑”打开这个文件，编辑起来会比 VIM 容易上手一些。
+
+**参考资料**
+
+- [《你明白 Shell、Bash 和 Zsh 等词的真正含义吗？》，阿德，2018-03-03。](https://zhuanlan.zhihu.com/p/34197680)  
+  [https://zhuanlan.zhihu.com/p/34197680](https://zhuanlan.zhihu.com/p/34197680)
+- [《终极 Shell》，池建强，2013-07-23。](http://macshuo.com/?p=676)  
+  [http://macshuo.com/?p=676](http://macshuo.com/?p=676)
+- [《让你的 Mac 提前用上 macOS Catalina 的 Shell —— Oh My Zsh 配置指南》，Steven，2019-06-12。](https://sspai.com/post/55176)  
+  [https://sspai.com/post/55176](https://sspai.com/post/55176)
+- [《关于“.bash_profile”和“.bashrc”区别的总结》，史晨，2017-04-20。](https://blog.csdn.net/sch0120/article/details/70256318)  
+  [https://blog.csdn.net/sch0120/article/details/70256318](https://blog.csdn.net/sch0120/article/details/70256318)
+- [《Mac 更新之后使用终端提示：The default interactive shell is now zsh.》，深碍，2019-12-26。](https://www.jianshu.com/p/26d365078081)  
+  [https://www.jianshu.com/p/26d365078081](https://www.jianshu.com/p/26d365078081)
+- [Bash, In *Wikipedia, the free encyclopedia*. Retrieved 2020-07-08.](https://en.wikipedia.org/wiki/Bash_(Unix_shell))  
+  [https://en.wikipedia.org/wiki/Bash_(Unix_shell)](https://en.wikipedia.org/wiki/Bash_(Unix_shell))
+- [Z shell, In *Wikipedia, the free encyclopedia*. Retrieved 2020-07-08.](https://en.wikipedia.org/wiki/Z_shell)  
+  [https://en.wikipedia.org/wiki/Z_shell](https://en.wikipedia.org/wiki/Z_shell)
+
 ## 2020-07-07
 
-计划在 Mixin Messenger 群里开个分享
+计划在 Mixin Messenger 群里开个分享，讲讲如何解决编程课遭遇的各种网络问题，为了应对更多的需求，专门把 macOS 上的情况也测试了一遍，然后发现 macOS Catalina (10.15) 有个“无法验证开发者就阻止程序运行”的坑。
+
+“无法验证开发者”的问题，可以在访达的“应用程序”里，按住 <kbd>Control</kbd> 的同时，用鼠标左键单击需要打开的应用的图标，再单击 <span class="menutext">打开</span>，就会弹出可供跳过验证、打开应用的对话框了。
 
 ## 2020-07-06
 
-想要搞一下 Windows Terminal 的美化，
+想要搞一下 Windows Terminal 的美化，然后就陷入了巨量的选项之中。
+
+首先看到了[李欢](https://www.zhihu.com/people/lihuan123) 2020 年 4 月 27 日写的[《简单配置与美化 PowerShell 和 Terminal》](https://zhuanlan.zhihu.com/p/104720872)，和 [Clint Richardson](https://twitter.com/clinterich) 2019 年 8 月 2 日写的[《*The New Windows Terminal – Install, Interact, and Customize*》](https://www.appliedis.com/the-new-windows-terminal-install-interact-and-customize/)。
+
+跟着研究了一下 [posh-git](https://github.com/dahlbyk/posh-git)，以及 [Windows Terminal Themes](https://atomcorp.github.io/themes/) 里让人眼花缭乱的主题配色，还参考了 [Thomas Maurer](https://www.thomasmaurer.ch/) 2020 年 6 月 14 日的相关推荐文章[《*My Windows Terminal Color Schemes*》](https://www.thomasmaurer.ch/2020/06/my-windows-terminal-color-schemes/)。
+
+这些折腾完，就轮到了字体，用于代码的等宽字体其实有不少可选项，但一混上中文情况就不妙了，理想的情况是 1 个中文字宽等于 2 个英文字宽，中英文混杂的行也能够纵向对齐，实际上这很难准确实现。我试了民间自制的 YaHei Consolas Hybrid（微软雅黑和 Consolas 的混合字体）、Microsoft Yahei Mono（也是微软雅黑和 Consolas 的混合字体）、Yahei Source Code Pro（微软雅黑和 Source Code Pro 的混合字体），都对不齐。专门用于这一目的制作的“等距更纱黑体”，对齐倒是很完美，但英文部分实在是显得太窄了，看着累人，最后我使用了 Fira Code 和汉仪旗黑的搭配。 
+
+**参考资料**
+
+- [《美化 Windows Terminal（iTerm2-Color-Schemes)》，Jioho_chen，2019-09-08。](https://blog.csdn.net/Jioho_chen/article/details/100624029)  
+  [https://blog.csdn.net/Jioho_chen/article/details/100624029](https://blog.csdn.net/Jioho_chen/article/details/100624029)
+- [《Retina 屏幕上的最佳编程字体》，Lenciel，2014-07-13。](https://lenciel.com/2014/07/font-for-programming/)  
+  [https://lenciel.com/2014/07/font-for-programming/](https://lenciel.com/2014/07/font-for-programming/)
+- [《推荐的编程字体》，余淦成，2015-08-08。](https://www.ifeegoo.com/recommended-programming-fonts.html)  
+  [https://www.ifeegoo.com/recommended-programming-fonts.html](https://www.ifeegoo.com/recommended-programming-fonts.html)
+- [What are the best programming fonts? *Slant*, Retrieved 2020-07-06.](https://www.slant.co/topics/67/~best-programming-fonts)  
+  [https://www.slant.co/topics/67/~best-programming-fonts](https://www.slant.co/topics/67/~best-programming-fonts)
+- [《Fira Code | 为写程序而生的字体》，Mogeko，2017-09-16。](https://www.jianshu.com/p/266b4fa2c446)  
+  [https://mogeko.me/2017/006/](https://mogeko.me/2017/006/)
+- [《分享一下自己修改的字体~ Yahei Source Code Pro v1.23》，DeepKolos，2017-07-15。](https://www.jianshu.com/p/28acf9226ddb)  
+  [https://www.jianshu.com/p/28acf9226ddb](https://www.jianshu.com/p/28acf9226ddb)
+- [YaHei Consolas Hybrid 和 Yahei Source Code Pro 的下载页面](https://github.com/yyxyz/OSOperateSkills/find/master)  
+  [https://github.com/yyxyz/OSOperateSkills/find/master](https://github.com/yyxyz/OSOperateSkills/find/master)
+- [更纱黑体主仓库](https://github.com/be5invis/Sarasa-Gothic)  
+  [https://github.com/be5invis/Sarasa-Gothic](https://github.com/be5invis/Sarasa-Gothic)
+- [Iosevka 字体主页](https://typeof.net/Iosevka/)  
+  [https://typeof.net/Iosevka/](https://typeof.net/Iosevka/)
 
 ## 2020-07-05
 
