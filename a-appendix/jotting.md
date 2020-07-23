@@ -2,6 +2,10 @@
 
 这里是一些我在学习过程中“注意力漂移”的记录。
 
+## 2020-07-23
+
+把之前所有值得记录一下的内容都补上了。
+
 ## 2020-07-22
 
 在搜索资料的时候撞进了 MegaEase 创始人陈皓的个人网站“[酷壳](https://coolshell.cn/)”（[CoolShell.cn](https://coolshell.cn/)），发现这是个颇有能力的人，他 2019 年 12 月 1 日的一篇文章[《别让自己“墙”了自己》](https://coolshell.cn/articles/20276.html)非常值得一读，另一篇写于 2019 年 11 月 3 日的[《UNIX 50 年：KEN THOMPSON 的密码》](https://coolshell.cn/articles/19996.html)也很有意思。
@@ -161,11 +165,91 @@ git add . ; git commit -m"说明" ; git push origin master
 
 ## 2020-07-16
 
+为了方便使用，把课程和笔记相关的文件夹固定到了资源管理器的快速访问区，然后就觉得那两个默认图标不大协调，就转去研究自定义文件夹图标了，搞清楚设置过程没花太多时间，但搞好要用的图标费了不少劲。
+
+最后自制了四个图标，基本上够用了，还有一点没什么影响的瑕疵，暂时我也不想再折腾了。
+
+具体过程整理成了[《设置文件夹》](/a-appendix/setting-folders.md)一文，可供参考。
+
 ## 2020-07-14
 
-想好好给李骏老师的课程《进入编程世界》写个笔记，参考[《GitBook 教程（小白入坑 GitBook 全过程）》（Broken故城，2020-02-20）](https://www.jianshu.com/p/0388d8bb49a7)、[《GitBook 使用教程》（yulilong，2019-01-21）](https://segmentfault.com/a/1190000017960359)，在 GitBook 新建了一个“Space”，关联到了 GitHub 的仓库。
+用了两天多的时间做功课，参考[《GitBook 教程（小白入坑 GitBook 全过程）》（Broken故城，2020-02-20）](https://www.jianshu.com/p/0388d8bb49a7)、[《GitBook 使用教程》（yulilong，2019-01-21）](https://segmentfault.com/a/1190000017960359)，在 GitBook 新建了一个“Space”（[https://shen-huang.gitbook.io/wop-notes-win/](https://shen-huang.gitbook.io/wop-notes-win/)），关联到了 GitHub 仓库。
+
+## 2020-07-13
+
+为了在苹果 App Store 美国区买应用，完整地跑了一遍用信用卡在[苹果官网买电子版礼品卡](https://www.apple.com/shop/gift-cards)的流程，不必登录账号，直接用访客身份购买即可，地址要写美国免税州里的（只有 5 个：Alaska、Delaware、Montana、New Hampshire、Oregon，Alaska 和 Montana 可能还有潜在税收，尽量不要写这两个），用 [Fake Address Generator](https://www.fakeaddressgenerator.com/) 生成即可。
+
+**参考资料**
+
+- [《通过购买礼品卡（Gift Cards）给美国 Apple ID 充值方法》，陈浩，2019-08-09](https://www.hurbai.com/iOS/182)  
+  [https://www.hurbai.com/iOS/182](https://www.hurbai.com/iOS/182)
+- [The 5 U.S. States Without a Statewide Sales Tax: Where to Do Your Purchasing in the U.S., In *The Balance*. Retrieved 2020-07-14.](https://www.thebalance.com/states-without-a-sales-tax-3193305)  
+  [https://www.thebalance.com/states-without-a-sales-tax-3193305](https://www.thebalance.com/states-without-a-sales-tax-3193305)
+- [《苹果突然封号，iPhone 这个漏洞，千万别碰》，雷科技，2020-01-22。](https://36kr.com/p/1725033807873)  
+  [https://mp.weixin.qq.com/s/gBVQcv7cIYLalqbhV8pvOw](https://mp.weixin.qq.com/s/gBVQcv7cIYLalqbhV8pvOw)
+
+## 2020-07-12
+
+想好好给李骏老师的课程《进入编程世界》写个笔记，2019 年做类似事情的时候，我就在 GitHub 仓库的 <span class="paths">README.md</span> 里写了，写了一阵子发现多少有点不方便：单页难以检索，分页跳转麻烦，样式限制很多，扩展能力孱弱。毕竟，<span class="paths">README.md</span> 不是用来写复杂文档的。
+
+我首先想到的替代方案，是 GitBook。2015 年的时候李笑来老师用 GitBook 做了在线版本的[《把时间当作朋友（第 3 版）》](https://legacy.gitbook.com/book/xiaolai/ba-shi-jian-dang-zuo-peng-you/details)，当时还基于它搞了“知笔墨”（已停止运维，旧页面可以从互联网档案馆的[网站时光机相关快照](https://web.archive.org/web/20180806235112/http://www.zhibimo.com/explore/books)里查看），我也因此对 GitBook 有了些感性认识。
+
+完整地看了几遍[《GitBook 文档（中文版）》（Samy Pessé 等著，沈煜 译，2016-12-12）](https://chrisniael.gitbooks.io/gitbook-documentation/content/)，打算明后天着手正式搭建。
+
+## 2020-07-11
+
+为了醒目、好看，我以往记录快捷键的时候如果遇到“Windows 键”，可能会额外多贴一个小图来表示：<kbd>![Win][Windows_Logo_12px] Win</kbd>，今天发现维基百科的处理方式是借用字符“⊞”，写成<kbd>⊞ Win</kbd>，看上去也能接受，不失为一种处理方法。
+
+**参考资料**
+
+- [Windows key, In *Wikipedia, the free encyclopedia*. Retrieved 2020-07-08.](https://en.wikipedia.org/wiki/Windows_key)  
+  [https://en.wikipedia.org/wiki/Windows_key](https://en.wikipedia.org/wiki/Windows_key)
+- [Is there a unicode character for the Windows key? Gabriel Fair, 2017-04-09.](https://superuser.com/questions/1247382/is-there-a-unicode-character-for-the-windows-key)  
+  [https://superuser.com/questions/1247382/is-there-a-unicode-character-for-the-windows-key](https://superuser.com/questions/1247382/is-there-a-unicode-character-for-the-windows-key)
+- [The Ultimate Guide to Windows Keyboard Shortcuts. HelloTech, 2017-01-16.](https://www.hellotech.com/blog/every-switchers-guide-to-windows-10-shortcuts)  
+  [https://www.hellotech.com/blog/every-switchers-guide-to-windows-10-shortcuts](https://www.hellotech.com/blog/every-switchers-guide-to-windows-10-shortcuts)
+
+## 2020-07-10
+
+Windows Terminal 对操作系统版本有要求（至少 18362.0，也就是 1903），这引发了一系列问题。
+
+为了用起来稳定、方便维护，我的台式机使用了从 VHDX 启动的 Windows 10 Enterprise 2019 LTSC，这个 Windows 10 分支的主版本是 1809，就算另外加装了 Microsoft Store 也装不了 Windows Terminal，LTSC 版和 VHDX 又都会导致无法进行大版本升级。
+
+我把系统转换成了 Windows 10 Pro，避开了 LTSC 的限制，但 VHDX 升级的限制没法绕过去。我只好在硬盘另外划分出来了一个分区，把 VHDX 的内容用分区复制的方式倒了进去，然后用这个新分区启动。启动、升级完成后，我想把这个系统再倒回 VHDX 里，用不同的分区复制的方式试验了数次，都无法启动，最终放弃了，决定就在这个用实体分区启动的 Windows 10 Pro 上完成课程的学习。
+
+**参考资料**
+
+- [《将 Windows 10 LTSC 版转换为专业版激活，使用纯净无预装的 Windows 10》，王洪峰，2019-04-12。](https://wanghongfeng.cn/LTSC2019.html)  
+  [https://wanghongfeng.cn/LTSC2019.html](https://wanghongfeng.cn/LTSC2019.html)
 
 ## 2020-07-09
+
+怎么都搞不定 macOS 上 Python 3.x 软链接的建立，按照说明折腾了一阵子，`python` 命令调用的一直是系统自带的 Python 2.7.3，虽然用 `python3` 也能解决问题，但我就是不服气，于是就干了“撞破南墙”的事情。
+
+我找到了系统自带的 Python 2.7.3 的位置：<span class="paths">/usr/bin/python</span>，但这个位置是系统管理的，用户不能直接操作，为了动它，我重开机，用 <kbd>⌘ Command</kbd> + <kbd>R</kbd> 进了 macOS 实用工具，然后运行 `csrutil disable` 关闭了 SIP（System Integrity Protection），然后获取了 <span class="paths">/usr/bin/ 的最高权限（777），把 <span class="paths">/usr/bin/python</span> 这个软链接删了，在原位置建立了到 <span class="paths">/usr/local/bin/python3</span> 的软链接。
+
+这么弄完，`python` 命令调用的确实是 Python 3.x 了，可是李骏老师告知我这个方法大错特错——macOS 不让用户动某些东西是有道理的，而且确实不应该动。我在老师的帮助下，明确了原本系统的软链接的路径，但由于我动了底层的设置，Terminal 无法正常工作了，在 macOS 实用工具里也处理不了……
+
+为了能正常用 Terminal，我手动建立了 root 账号，在其中还原了最初的软链接，又重新打开了 SIP，删掉了 root 账号，这才回到了起点。
+
+我无奈之下提了个 Issue：“[无法在 macOS 的 Terminal 使用 `python` 指令调用 Python 3.7.x](https://github.com/neolee/wop-community/issues/88)”，经过一系列排查和尝试，最后靠强制建立软链接搞好了，但这应该也不是问题的根源，李骏老师最后说：因为现场很难还原，当时到底发生了什么已不可考，施主请放下吧……
+
+**参考资料**
+
+- [《5 分钟让你明白“软链接”和“硬链接”的区别》，Cyandev，2016-07-08。](https://www.jianshu.com/p/dde6a01c4094)  
+  [https://www.jianshu.com/p/dde6a01c4094](https://www.jianshu.com/p/dde6a01c4094)
+- [Fix Terminal “Operation not permitted” Error in MacOS Mojave. Paul Horowitz, 2018-10-09.](https://osxdaily.com/2018/10/09/fix-operation-not-permitted-terminal-error-macos/)  
+  [https://osxdaily.com/2018/10/09/fix-operation-not-permitted-terminal-error-macos/](https://osxdaily.com/2018/10/09/fix-operation-not-permitted-terminal-error-macos/)
+- [How to Disable System Integrity Protection (rootless) in Mac OS X. Paul Horowitz, 2015-10-05.](https://osxdaily.com/2015/10/05/disable-rootless-system-integrity-protection-mac-os-x/)  
+  [https://osxdaily.com/2015/10/05/disable-rootless-system-integrity-protection-mac-os-x/](https://osxdaily.com/2015/10/05/disable-rootless-system-integrity-protection-mac-os-x/)
+- [《macOS 开启或关闭 SIP》，雪谋，2019-06-07。](https://sspai.com/post/55066)  
+  [https://sspai.com/post/55066](https://sspai.com/post/55066)
+- [《MacOS (Catalina)：显示 Read-only file system 的对应方法》，liumiaocn，2020-02-15。](https://blog.csdn.net/liumiaocn/article/details/104324664)  
+  [https://blog.csdn.net/liumiaocn/article/details/104324664](https://blog.csdn.net/liumiaocn/article/details/104324664)
+- [《macOS Catalina 无法删除 /usr/bin/ 下面的文件》，高金，2019-10-10。](https://igaojin.me/2019/10/10/Mac-catalina-%E6%97%A0%E6%B3%95%E5%88%A0%E9%99%A4-usr-bin-%E4%B8%8B%E9%9D%A2%E7%9A%84%E6%96%87%E4%BB%B6/)  
+  [https://igaojin.me/2019/10/10/Mac-catalina-无法删除-usr-bin-下面的文件/](https://igaojin.me/2019/10/10/Mac-catalina-%E6%97%A0%E6%B3%95%E5%88%A0%E9%99%A4-usr-bin-%E4%B8%8B%E9%9D%A2%E7%9A%84%E6%96%87%E4%BB%B6/)
+- [《macOS 修改 /usr/bin/ 权限后导致控制台无法使用》，迷途中的小码农，2019-04-18。](https://blog.csdn.net/ethan__xu/article/details/89390220)  
+  [https://blog.csdn.net/ethan__xu/article/details/89390220](https://blog.csdn.net/ethan__xu/article/details/89390220)
 
 ## 2020-07-08
 
@@ -216,8 +300,16 @@ git add . ; git commit -m"说明" ; git push origin master
   [https://www.ifeegoo.com/recommended-programming-fonts.html](https://www.ifeegoo.com/recommended-programming-fonts.html)
 - [What are the best programming fonts? *Slant*, Retrieved 2020-07-06.](https://www.slant.co/topics/67/~best-programming-fonts)  
   [https://www.slant.co/topics/67/~best-programming-fonts](https://www.slant.co/topics/67/~best-programming-fonts)
+- [《编程字体》，bayhiker，2019-09-25。](https://blog.rule55.com/coding-fonts/)  
+  [https://blog.rule55.com/coding-fonts/](https://blog.rule55.com/coding-fonts/)
+- [《推荐几款连字字体，在代码编辑器中启用连字字体（Visual Studio Code）》，吕毅，2019-09-27。](https://blog.csdn.net/WPwalter/article/details/101512456)  
+  [https://blog.csdn.net/WPwalter/article/details/101512456](https://blog.csdn.net/WPwalter/article/details/101512456)
+- [《CSS font-family 常见中文字体对应的英文名称》，张鑫旭，2017-03-25。](https://www.zhangxinxu.com/wordpress/2017/03/css-font-family-chinese-english/)  
+  [https://www.zhangxinxu.com/wordpress/2017/03/css-font-family-chinese-english/](https://www.zhangxinxu.com/wordpress/2017/03/css-font-family-chinese-english/)
 - [《Fira Code | 为写程序而生的字体》，Mogeko，2017-09-16。](https://www.jianshu.com/p/266b4fa2c446)  
   [https://mogeko.me/2017/006/](https://mogeko.me/2017/006/)
+- [《Fira Code: 一个有趣而实用的编程字体》，Luo Jia，2018-06-20。](https://luojia.cc/2018/06/20/font-fira-code/)  
+  [https://luojia.cc/2018/06/20/font-fira-code/](https://luojia.cc/2018/06/20/font-fira-code/)
 - [《分享一下自己修改的字体~ Yahei Source Code Pro v1.23》，DeepKolos，2017-07-15。](https://www.jianshu.com/p/28acf9226ddb)  
   [https://www.jianshu.com/p/28acf9226ddb](https://www.jianshu.com/p/28acf9226ddb)
 - [YaHei Consolas Hybrid 和 Yahei Source Code Pro 的下载页面](https://github.com/yyxyz/OSOperateSkills/find/master)  
@@ -283,11 +375,11 @@ Version 7 Unix 系统还给出了“次要提示符”“`>`”，我们可以�
 
 在开课之前打算先把环境搞好，本来不算麻烦的事，真正弄起来就遇到了各种意外。
 
-- Windows Terminal 对操作系统版本有要求（至少 18362.0，也就是 1903），这引发了一系列问题
+<!-- - Windows Terminal 对操作系统版本有要求（至少 18362.0，也就是 1903），这引发了一系列问题
     - 为了用起来稳定一些，我使用了 Windows 10 Enterprise 2019 LTSC，它的主版本是 1809，就算另外加装了 Microsoft Store 也装不了 Windows Terminal
     - 为了升级，我把系统转换成了 Windows 10 Pro，但因为之前为了方便维护，我是从 VHDX 启动的系统，这样的系统没法进行大版本升级
     - 在硬盘另外划分出来了一个分区，把 VHDX 的内容用分区复制的方式倒了进去，然后用这个新分区启动
-    - 启动、升级完成后，我想把这个系统再倒回 VHDX 里，用不同的分区复制的方式试验了数次，都无法启动，最终放弃了
+    - 启动、升级完成后，我想把这个系统再倒回 VHDX 里，用不同的分区复制的方式试验了数次，都无法启动，最终放弃了 -->
 - Scoop 安装的时候要访问 [raw.githubusercontent.com](raw.githubusercontent.com)，这可能遭遇各种网络问题
     - 改本地 hosts 无效
     - 修改 DNS 服务器设置无效
@@ -295,13 +387,13 @@ Version 7 Unix 系统还给出了“次要提示符”“`>`”，我们可以�
 - Homebrew 的安装遇到了和 Scoop 一样的网络问题
     - 可以用 `export` 命令给 Terminal 设置代理
     - 为了将来方便，把代理设置写入了 <span class="paths">.bash_profile</span>
-- 在 macOS 上为 `python` 建立软链接的时候怎么都无法生效
+<!-- - 在 macOS 上为 `python` 建立软链接的时候怎么都无法生效
     - 打破了 macOS Catalina 设置的各种权限，最终替掉了系统自带的 Python 2.7 的软链接
     - 由于对系统核心的设置进行了修改，Terminal 无法正常工作了
     - 单独建立了 root 账户，把系统还原
     - 使用强制建立软链接的方式实现了最初的目的
     - 删除软链接、再使用原本的方式建立软链接，也没问题了
-    - 故障原因最终未查明
+    - 故障原因最终未查明 -->
 
 <!-- 
 链接
@@ -314,3 +406,13 @@ Version 7 Unix 系统还给出了“次要提示符”“`>`”，我们可以�
 [Coolors]: https://coolors.co/
 [HTML Color Codes]: https://htmlcolorcodes.com/
 [PortableSoft]: https://www.portablesoft.org/
+
+<!-- 
+图片
+ -->
+
+[Windows_Logo_20px]: https://upload.wikimedia.org/wikipedia/commons/thumb/2/2b/Windows_logo_2012-Black.svg/20px-Windows_logo_2012-Black.svg.png
+[Windows_Logo_16px]: https://upload.wikimedia.org/wikipedia/commons/thumb/2/2b/Windows_logo_2012-Black.svg/16px-Windows_logo_2012-Black.svg.png
+[Windows_Logo_12px]: https://raw.githubusercontent.com/shen-huang/img/master/Logo/Windows_logo_2012-Black_12px.svg?sanitize=true
+[Windows_Logo_8px]: https://raw.githubusercontent.com/shen-huang/img/master/Logo/Windows_logo_2012-Black_8px.svg?sanitize=true
+[Windows_Logo_6px]: https://raw.githubusercontent.com/shen-huang/img/master/Logo/Windows_logo_2012-Black_6px.svg?sanitize=true
