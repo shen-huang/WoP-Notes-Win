@@ -20,11 +20,23 @@
 
 苏州的思杰马克丁公司，是家很有特色的公司，从知乎的一个问答“[如何评价苏州思杰马克丁软件公司？](https://www.zhihu.com/question/46746200)”中就可见一斑，虽然很多事情我已经有所了解了，但还是忍不住又花了些时间更新了一下相关信息，顺带又浏览了一遍 [FXXKMAKEDING](https://www.fxxkmakeding.xyz/)。
 
+## 2020-07-19
+
+在找 [docsify][] 的相关文档时看到了 koala 在 2020 年 5 月 20 日写的[《使用 VuePress 搭建博客》](http://www.inode.club/webframe/tool/vuepressBlog.html)，这篇文章引用的官方文档[《VuePress 指南（中文版）》](https://v1.vuepress.vuejs.org/zh/guide/)（[真山](https://ulivz.com/)，2019-06-04）提到了这么个问题：
+
+> **为什么不是 Docsify / Docute？**
+>
+> 这两个项目同样都是基于 Vue，然而它们都是完全的运行时驱动，因此对 SEO 不够友好。如果你并不关注 SEO，同时也不想安装大量依赖，它们仍然是非常好的选择！
+
+对比来说，VuePress 使用的方式是“预先渲染”，这使得 VuePress 有相对更好的性能和更好的 SEO 特性，docsify 的优势则在于配置方便。
+
+我考虑了一下，决定不折腾了，下次要写什么东西的时候再试 VuePress 吧，总会有用到的时候的。
+
 ## 2020-07-18
 
 因为觉得 [docsify][] 的 [docsify-themeable 主题][]原始的配色稍微有些不合心意，又因此做了一串功课。
 
-- 尝试找出原始的配色，但是用 `:root` 和 `var()` 写出来的样式表调试不难、阅读不易，前前后后找了好久，还动用了浏览器的“开发人员工具”（快捷键 <kbd>F12</kbd> 或者 <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>I</kbd>），对样式做了一系列的跟踪才最终确定。
+- 尝试找出原始的配色，但是用 `:root` 和 `var()` 写出来的样式表配置不难、阅读不易，前前后后找了好久，还动用了浏览器的“开发人员工具”（快捷键 <kbd>F12</kbd> 或者 <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>I</kbd>），对样式做了一系列的跟踪才最终确定。
 - 主题使用的颜色方案是 HSL，通过 [W3Schools][] 的 [Colors Tutorial](https://www.w3schools.com/colors/default.asp) 做了一系列的转换（主要是 RGB、HEX、HSL 间的），又通过 [Coolors][] 试了一些搭配。
 - 有些临时用一下的颜色标记，我犯懒就没调样式表，直接写进文字里了，为了代码上好看一点，使用了“HTML 颜色名”，参考了 [HTML Color Codes][] 提供的非常好用的 [HTML 颜色名工具](https://htmlcolorcodes.com/color-names/)。
 
@@ -66,10 +78,12 @@ git add . ; git commit -m"说明" ; git push origin master
     - 写到一半的部分放在那里不好看
 - 找个和 GitHub 联动的发布工具，[GitBook](https://www.gitbook.com/) 可能就行了
     - GitBook 在 2018 年改了版，新版没有了引入自有样式的功能
-    - GitBook 现在的免费的“空间”数量非常有限，这显然是受到了 GitBook 商业化运营的影响
-    - 网上大量 GitBook 的资讯现在都已经严重过时，新版的帮助文档也不够完整好用
+    - GitBook 现在免费的“空间”数量非常有限，这显然是受到了 GitBook 商业化运营的影响
+    - 网上大量 GitBook 的资讯现在都已经严重过时，新版的帮助文档也不够完整好用  
+      <span class="commentary">意味着我读相关资料的时间都失去价值了，其实我先看英文资料就会发现这些情况的，可惜……</span>
     - GitBook 对样式的过滤和 GitHub 一样严格，连给文字加个颜色都没办法
-- 放弃 GitBook，备份、删库，做了些功课后决定改用 [docsify][]
+- 放弃 GitBook，备份、删库，做了些功课后决定改用 [docsify][]  
+  <span class="commentary">一个原因是李笑来老师现在在用 docsify 发布文章和书籍</span>
     - 安装
         - Node.js  
           ```powershell
@@ -158,6 +172,12 @@ git add . ; git commit -m"说明" ; git push origin master
 
 - [《基于Github Pages + docsify，我花了半天就搭建好了个人博客》，二营长，2020-01-05。](https://blog.csdn.net/m0_37965018/article/details/103841362)  
   [https://blog.csdn.net/m0_37965018/article/details/103841362](https://blog.csdn.net/m0_37965018/article/details/103841362)
+- [《淺談新版 GitBook（GitBook V2）——失去交流開放精神的企業導向產品》，Yuni，2019-08-28。](https://www.onejar99.com/gitbook-v2-comment/)  
+  [https://www.onejar99.com/gitbook-v2-comment/](https://www.onejar99.com/gitbook-v2-comment/)
+- [《如何看待 GitBook 的改版？》，Lellansin Huang，2018-04-11。](https://www.zhihu.com/question/271881476)  
+  [https://www.zhihu.com/question/271881476](https://www.zhihu.com/question/271881476)
+- [《關於 GitBook 平台的改版與 GitLab 替代的考量》，王克明，2018-09-27。](https://www.kenming.idv.tw/about_gitbook-v2_and_gitlab_alternative/)  
+  [https://www.kenming.idv.tw/about_gitbook-v2_and_gitlab_alternative/](https://www.kenming.idv.tw/about_gitbook-v2_and_gitlab_alternative/)
 - [《CSS中的 “var()” 和 “:root”》，ArvinWoo，2018-11-26。](https://blog.csdn.net/qq_37595946/article/details/84531311)  
   [https://blog.csdn.net/qq_37595946/article/details/84531311](https://blog.csdn.net/qq_37595946/article/details/84531311)
 - [《var()》，Mozilla 贡献者，2019-11-13。](https://developer.mozilla.org/zh-CN/docs/Web/CSS/var)  
@@ -288,7 +308,7 @@ Windows Terminal 对操作系统版本有要求（至少 18362.0，也就是 190
 
 跟着研究了一下 [posh-git](https://github.com/dahlbyk/posh-git)，以及 [Windows Terminal Themes](https://atomcorp.github.io/themes/) 里让人眼花缭乱的主题配色，还参考了 [Thomas Maurer](https://www.thomasmaurer.ch/) 2020 年 6 月 14 日的相关推荐文章[《*My Windows Terminal Color Schemes*》](https://www.thomasmaurer.ch/2020/06/my-windows-terminal-color-schemes/)。
 
-这些折腾完，就轮到了字体，用于代码的等宽字体其实有不少可选项，但一混上中文情况就不妙了，理想的情况是 1 个中文字宽等于 2 个英文字宽，中英文混杂的行也能够纵向对齐，实际上这很难准确实现。我试了民间自制的 YaHei Consolas Hybrid（微软雅黑和 Consolas 的混合字体）、Microsoft Yahei Mono（也是微软雅黑和 Consolas 的混合字体）、Yahei Source Code Pro（微软雅黑和 Source Code Pro 的混合字体），都对不齐。专门用于这一目的制作的“等距更纱黑体”，对齐倒是很完美，但英文部分实在是显得太窄了，看着累人，最后我使用了 Fira Code 和汉仪旗黑的搭配。 
+这些折腾完，就轮到了字体，用于代码的等宽字体其实有不少可选项，但一混上中文情况就不妙了，理想的情况是 1 个中文字宽等于 2 个英文字宽，中英文混杂的行也能够纵向对齐，实际上这很难准确实现。我试了民间自制的 YaHei Consolas Hybrid（微软雅黑和 Consolas 的混合字体）、Microsoft Yahei Mono（也是微软雅黑和 Consolas 的混合字体）、Yahei Source Code Pro（微软雅黑和 Source Code Pro 的混合字体），都对不齐。专门用于这一目的制作的“等距更纱黑体”，对齐倒是很完美，但英文部分实在是显得太窄了，看着累人，最后我选择了保持原状，将来再折腾吧…… 
 
 **参考资料**
 
