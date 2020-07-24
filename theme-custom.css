@@ -316,6 +316,11 @@
     font-family: var(--code-font-family);
 }
 
+.commentary {
+    font-size: 0.9em;
+    color: dimgray;
+}
+
 .menutext {
     display: inline-block;
     background: #e9e9e9;
