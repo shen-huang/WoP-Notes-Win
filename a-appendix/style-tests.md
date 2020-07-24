@@ -24,8 +24,14 @@
 ```html
 <span class="paths">%SystemRoot%\System32\\</span>
 ```
-
 <span class="paths">%SystemRoot%\System32\\</span>
+
+## 注释
+
+```html
+<span class="commentary">文内注释</span>
+```
+<span class="commentary">文内注释</span>
 
 ## 菜单
 
