@@ -40,7 +40,7 @@ Visual Studio Code（简称 VS Code）是功能非常丰富的一个开源现代
 
 ![][Visual_Studio_Code_Chinese_Interface]
 
-### 主题、图标、字体
+### 主题、图标
 
 VS Code 的应用商店中有着大量可以选择的扩展，主题和图标就是其中数目众多的两类，它们可以改变 VS Code 的“外貌”，让 VS Code 更适合具体用户的口味。
 
@@ -52,7 +52,27 @@ VS Code 的应用商店中有着大量可以选择的扩展，主题和图标就
 
 ![][Visual_Studio_Code_Extensions_Theme_Preview]
 
-这些搜索结果是按照用户评价的综合得分排列的，所以开头列出的这些都值得一试，话虽这样说，但挨个安装、切换、调试这些主题，也是件费时费力的事情
+这些搜索结果是按照用户评价的综合得分排列的，所以开头列出的这些都值得一试，点击页面中绿色的<button class="btn green mini">安装</button>按钮，即可安装主题。
+
+安装完成后，点击 VS Code 左侧工具栏里的 <span class="menutext">管理</span> 按钮，再点击 <span class="menutext">颜色主题</span>（快捷键为先按 <kbd>Ctrl</kbd> + <kbd>K</kbd>，再按 <kbd>Ctrl</kbd> + <kbd>T</kbd>），会弹出对话框，使用 <kbd>↑</kbd> 和 <kbd>↓</kbd> 可以预览主题，点击即为选用。
+
+好主题很多，挨个安装、切换、调试这些主题，也是件费时费力的事情。为了挑选起来轻松一点，我参考了 Geoff Stevens 在 2020 年 1 月 6 日写的[《50 VS Code themes for 2020》](https://dev.to/thegeoffstevens/50-vs-code-themes-for-2020-45cc)（[原发表于 Software.com](https://www.software.com/src/50-vs-code-themes-for-2020)），这篇文章还给出了三个方便测试的“合集”：
+- [深色主题包（Best Dark Themes Pack）](https://marketplace.visualstudio.com/items?itemName=thegeoffstevens.best-dark-themes-pack)
+- [浅色主题包（Best Light Themes Pack）](https://marketplace.visualstudio.com/items?itemName=thegeoffstevens.best-light-themes-pack)
+- [多色主题包（Best Light Themes Pack）](https://marketplace.visualstudio.com/items?itemName=thegeoffstevens.best-colorful-themes-pack)
+
+图标的设定和主题很相似，使用关键字“Icon”在扩展面板里搜索、安装即可。安装后点击 <span class="menutext">管理</span> 按钮，再点击 <span class="menutext">文件图标主题</span>，就会弹出供预览、选择的对话框。
+
+我最后选择了 [One Monokai](https://marketplace.visualstudio.com/items?itemName=azemoh.one-monokai) 主题，和 [Material Icon Theme](https://marketplace.visualstudio.com/items?itemName=PKief.material-icon-theme) 图标包。
+
+### 字体
+
+与主题
+
+<!-- TODO -->
+
+<!-- 我使用了 Fira Code 和汉仪旗黑的搭配 -->
+
 
 <!-- 插图 -->
 
