@@ -69,7 +69,9 @@ VS Code 的应用商店中有着大量可以选择的扩展，主题和图标就
 
 ### 字体
 
-与主题
+VS Code 默认的英文字体为 <span style="font-family: Consolas, sans-serif;">Consolas</span>，这是微软专门为代码显示设计的一款等宽字体，在大部分时间都挺合用的，但一混上中文情况就不妙了，由于 <span style="font-family: Consolas, sans-serif;">Consolas</span> 本身没有中文部分，VS Code 的中文会默认使用<span style="font-family: SimSun, serif;">宋体</span>来显示，这看上去就不大协调，应该另外搭配无衬线的中文字体才好。
+
+中英文混杂的另一个麻烦事是对齐问题。理想的情况是 1 个中文字宽等于 2 个英文字宽，这样中英文混杂的行也能够纵向对齐，实际上这很难准确实现。我试了民间自制的 YaHei Consolas Hybrid（微软雅黑和 Consolas 的混合字体）、Microsoft Yahei Mono（也是微软雅黑和 Consolas 的混合字体）、Yahei Source Code Pro（微软雅黑和 Source Code Pro 的混合字体），都对不齐。
 
 <!-- TODO -->
 

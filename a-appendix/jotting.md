@@ -347,7 +347,7 @@ Windows Terminal 对操作系统版本有要求（至少 18362.0，也就是 190
 
 **参考资料**
 
-- [《联想杀毒 PLUS》，wildtree23，2020-06-05。](https://bbs.kafan.cn/thread-2183667-1-1.html)
+- [《联想杀毒 PLUS》，wildtree23，2020-06-05。](https://bbs.kafan.cn/thread-2183667-1-1.html)  
   [https://bbs.kafan.cn/thread-2183667-1-1.html](https://bbs.kafan.cn/thread-2183667-1-1.html)
 - [《【联想客服内部超级爆料】你的联想杀毒 Plus 安全软件卸载了没有？》，1T科技，2020-06-14。](https://www.bilibili.com/video/BV1Bk4y1z7d5)  
   [https://www.bilibili.com/video/BV1Bk4y1z7d5](https://www.bilibili.com/video/BV1Bk4y1z7d5)
@@ -358,7 +358,7 @@ Windows Terminal 对操作系统版本有要求（至少 18362.0，也就是 190
 
 不过我因此生出了另一个问题：为什么是 `$`？
 
-在网上做了一阵子功课后发现，`$` 的使用可以追溯到 1979 年发布的 Version 7 Unix 系统，这个选择可能来自于早在 1963 年就面世的电传打字机 Teletype Model 33 ASR (**A**utomatic **S**end and **R**eceive)——由于其键盘上可用的符号很少，提示符又需要“尽量简短”且“不易混淆”，最终，工程师挑选了 `$`。另一个可能来源，是 1962 年 IBM 推出的 FORTRAN IV，那个时期的计算机还没有键盘和显示器，所有的程序输入打孔卡片实现，程序输出则靠打印机实现，在输出的时候，FORTRAN IV 使用了 `$` 来标记那些输入的命令。
+在网上做了一阵子功课后发现，`$` 的使用可以追溯到 1979 年发布的 Version 7 Unix 系统，这个选择可能来自于早在 1963 年就面世的电传打字机 Teletype Model 33 ASR (**A**utomatic **S**end and **R**eceive)——由于其键盘上可用的符号很少，提示符又需要“尽量简短”且“不易混淆”，最终，工程师挑选了 `$`。另一个可能来源，是 1962 年 IBM 推出的 FORTRAN IV，那个时期的计算机还没有键盘和显示器，所有的程序输入都靠打孔卡片实现，程序输出则靠打印机实现，在输出的时候，FORTRAN IV 使用了 `$` 来标记那些输入的命令。
 
 在 1979 年之前，Unix 系统使用的 Shell 是“C Shell”，其默认的提示符是“`%`”，Version 7 Unix 系统使用了 Stephen Bourne 开发的“Bourne Shell”，其默认提示符选择了“`$`”，在随后的时光中，Version 7 Unix 系统产生了巨大的影响，`$` 也成为了 Unix 系统和类 Unix 系统惯用的提示符。macOS 的内核是从 Unix 的分支开发而来的，也就继承了使用 `$` 的传统。
 
@@ -406,7 +406,7 @@ Version 7 Unix 系统还给出了“次要提示符”“`>`”，我们可以�
     - Windows Terminal 是个 UWP 应用，默认没法加本地代理，最后用 Clash for Windows 带的 AppContainer Loopback Exemption Utility（又称 UWP Loopback Helper）给它加上了代理
 - Homebrew 的安装遇到了和 Scoop 一样的网络问题
     - 可以用 `export` 命令给 Terminal 设置代理
-    - 为了将来方便，把代理设置写入了 <span class="paths">.bash_profile</span>
+    - 为了将来方便，把代理设置写入了 <span class="paths">~/.bash_profile</span>
 
 <!-- 
 - 在 macOS 上为 `python` 建立软链接的时候怎么都无法生效
