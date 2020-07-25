@@ -1,4 +1,4 @@
 # 软件配置
 
-## Visural Studio Code
+## Visual Studio Code
 
