@@ -65,6 +65,8 @@ VS Code 的应用商店中有着大量可以选择的扩展，主题和图标就
 
 我最后选择了 [One Monokai](https://marketplace.visualstudio.com/items?itemName=azemoh.one-monokai) 主题，和 [Material Icon Theme](https://marketplace.visualstudio.com/items?itemName=PKief.material-icon-theme) 图标包。
 
+![][Visual_Studio_Code_Theme_and_Icons]
+
 ### 字体
 
 与主题
@@ -85,6 +87,7 @@ VS Code 的应用商店中有着大量可以选择的扩展，主题和图标就
 [Visual_Studio_Code_Chinese_Interface]: https://raw.githubusercontent.com/shen-huang/img/master/2020-07/Visual_Studio_Code_Chinese_Interface.png
 [Visual_Studio_Code_Extensions_Theme]: https://raw.githubusercontent.com/shen-huang/img/master/2020-07/Visual_Studio_Code_Extensions_Theme.png
 [Visual_Studio_Code_Extensions_Theme_Preview]: https://raw.githubusercontent.com/shen-huang/img/master/2020-07/Visual_Studio_Code_Extensions_Theme_Preview.png
+[Visual_Studio_Code_Theme_and_Icons]: https://raw.githubusercontent.com/shen-huang/img/master/2020-07/Visual_Studio_Code_Theme_and_Icons.png
 
 <!-- 
 https://raw.githubusercontent.com/shen-huang/img/master/2020-07/
