@@ -62,7 +62,7 @@
     --blockquote-quotes-open            : ;
 
     /* Code */
-    --code-font-family                  : Inconsolata, Consolas, Menlo, Monaco, "Andale Mono WT", "Andale Mono", "Lucida Console", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", "Courier New", Courier, "Noto Sans CJK SC", "Source Han Sans SC", "Source Han Sans CN", "Microsoft Yahei", 微软雅黑, monospace;
+    --code-font-family                  : 'Fira Code', Inconsolata, Consolas, Menlo, Monaco, "Andale Mono WT", "Andale Mono", "Lucida Console", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", "Courier New", Courier, "Noto Sans CJK SC", "Source Han Sans SC", "Source Han Sans CN", "Microsoft Yahei", 微软雅黑, monospace;
     --code-font-size                    : calc(var(--font-size-m) * 0.95);
     --code-font-weight                  : normal;
     --code-tab-size                     : 4;
@@ -165,15 +165,15 @@
     --kbd-padding                       : 0.2em 0.3em 0.2em 0.3em;
 
     /* Links */
-    --link-border-bottom                : ;
-    --link-border-bottom--hover         : ;
-    --link-color                        : var(--theme-color);
-    --link-color--hover                 : var(--code-theme-selector);
+    --link-border-bottom                : 1px solid var(--mono-tint1);
+    --link-border-bottom--hover         : 1px solid var(--theme-color);
+    /* --link-color                        : var(--base-color); */
+    --link-color--hover                 : var(--theme-color);
     --link-text-decoration              : ;
-    --link-text-decoration--hover       : underline;
+    --link-text-decoration--hover       : ;
     --link-text-decoration-color        : ;
     --link-text-decoration-color--hover : ;
-
+   
     /* Notice */
     --notice-background                 : var(--mono-tint3);
     --notice-border-color               : ;
@@ -228,12 +228,12 @@
 
     /* Tables */
     --table-body-border-color           : ;
-    --table-body-border-width           : ;
-    --table-cell-border-color           : ;
+    --table-body-border-width           : 0px;
+    --table-cell-border-color           : var(--mono-tint2);
     --table-cell-border-width           : ;
     --table-cell-padding                : 0.75em 0.5em;
     --table-head-background             : ;
-    --table-head-border-color           : var(--table-cell-border-color);
+    --table-head-border-color           : var(--mono-tint2);
     --table-head-border-width           : ;
     --table-head-font-weight            : var(--strong-font-weight);
     --table-row-even-background         : ;
@@ -249,8 +249,8 @@
 	--mono-shade2: hsl(var(--mono-hue), var(--mono-saturation), 30%);
 	--mono-shade1: hsl(var(--mono-hue), var(--mono-saturation), 40%);
 	--mono-base: hsl(var(--mono-hue), var(--mono-saturation), 50%);
-	--mono-tint1: hsl(var(--mono-hue), var(--mono-saturation), 70%);
-	--mono-tint2: hsl(var(--mono-hue), var(--mono-saturation), 81%);
+	--mono-tint1: hsl(var(--mono-hue), var(--mono-saturation), 64%);
+	--mono-tint2: hsl(var(--mono-hue), var(--mono-saturation), 78%);
 	--mono-tint3: hsl(var(--mono-hue), var(--mono-saturation), 92%);
 	--theme-hue: 204;
 	--theme-saturation: 90%;
@@ -283,7 +283,7 @@
 :root {
 	--base-background-color: #fafafa;
 	--base-color: var(--mono-shade5);
-	--base-font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+	--base-font-family: -apple-system, BlinkMacSystemFont, "Noto Serif", , Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Sans SC", "Source Han Sans SC", "Source Han Sans CN", "Microsoft Yahei", 微软雅黑, sans-serif;
 	--base-font-size: 16px;
 	--base-font-weight: normal;
 	--base-line-height: 1.7;
@@ -312,6 +312,24 @@
     --pagination-title-font-size       : var(--font-size-l);
 }
 
+kbd {
+    box-shadow: 0px 2px 0px 0px rgba(0,0,0,0.2);
+}
+
+u {
+    text-decoration: none;
+    padding-bottom: 1.8px;
+    border-bottom: 1px solid;
+}
+
+a, a:hover {
+    padding-bottom: 1.8px;
+}
+
+.chs {
+    font-family: -apple-system, "SimSun", "STSong", "Noto Sans CJK SC", "Source Han Sans SC", "Source Han Sans CN", "Microsoft Yahei", 微软雅黑;
+}
+
 .paths {
     font-family: var(--code-font-family);
 }
@@ -330,7 +348,41 @@
     border-color: #bbb
 }
 
-kbd {
-    box-shadow: 0px 2px 0px 0px rgba(0,0,0,0.2);
+.figtitle {
+    /* width: 100%; */
+    position: relative;
+    z-index: 100;
+    margin-top: -1.65em;
+    margin-bottom: 1em;
+    margin-left: 0;
+    padding: 2px 0 2px 10px;
+    border-left: 5px solid rgba(0, 0, 0, 0.3);
+    background-color: #dddddd;
+    font-size: 0.9em;
+    color: rgba(0, 0, 0, 0.7);
+}
+
+.figtitlevia {
+    float: right;
+    padding-right: 10px;
+}
+
+.figwithback {
+    background-color: var(--code-theme-background);
+}
+
+/* 着重号，只能在少量（少于100个字符）且全是全角字符的情况下使用 */
+.typo-em {
+    position: relative;
+}
+  
+.typo-em:after {
+    position: absolute;
+    top: 0.65em;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    content: "・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・・";
 }
 
