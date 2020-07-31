@@ -2,6 +2,310 @@
 
 这里是一些我在学习过程中“注意力漂移”的记录。
 
+## 2020-08-01
+
+发现了一个使用零宽字符（零宽空格、零宽连字、零宽不连字）在文章中藏匿信息的方法，具体操作可见 Jad 在 2018 年 4 月 13 日发布的[《我仔细看了半天，才从字缝里看出字来……》](https://imjad.cn/archives/code/hide-text-typecho-plugin/)一文。
+
+另外明确了一下，不要使用“H5”来简称“HTML5”，细节可见“JS小组”在 2015 年 7 月 5 日发布的[《为何不要用「h5」这个简称？》](https://mp.weixin.qq.com/s/AZ4gKhPRmIV2poHgURbVYA)一文。
+
+**参考资料**
+
+- [Be careful what you copy: Invisibly inserting usernames into text with Zero-Width Characters. Tom Ross, 2018-04-03.](https://medium.com/@umpox/be-careful-what-you-copy-invisibly-inserting-usernames-into-text-with-zero-width-characters-18b4e6f17b66)  
+  [https://link.medium.com/zKcoNeBPy8](https://medium.com/@umpox/be-careful-what-you-copy-invisibly-inserting-usernames-into-text-with-zero-width-characters-18b4e6f17b66)
+
+## 2020-07-31
+
+想在网页上用 Fira Code、Noto Sans SC、Noto Serif SC 这几种字体，常规方案是用 [Google Fonts](https://fonts.google.com/) 导入，按照现在的情况，使用中国大陆地区的 DNS 解析 Google Fonts 链接会指向中国大陆地区的服务器，但我还是感觉比较悬，不敢直接就这么用。
+
+做了一阵子功课，发现郭秀峰（[Showfom](github.com/Showfom)，又被称作“兽兽”）的捷速网络运营的 CDN 服务 [loli.net](https://loli.net/) 有 Google Fonts 的加速业务，只需要把链接里的 `fonts.googleapis.com` 替换为 `fonts.loli.net` 即可使用。
+
+具体示例——
+
+原始链接：
+
+```html
+<link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet'>
+```
+
+加速链接：
+
+```html
+<link href='https://fonts.loli.net/css?family=Open+Sans' rel='stylesheet'>
+```
+
+我另外阅读了 Harry Roberts 在 2020 年 5 月 19 日撰写的《[最快的 Google Fonts](cloud.tencent.com/developer/news/643958)》（[*The Fastest Google Fonts*](https://csswizardry.com/2020/05/the-fastest-google-fonts/)）一文，Harry Roberts 经过了一系列的测试，建议使用如下代码段提升使用了 Google Fonts 的网页的性能：
+
+```html
+<!--
+  - 1. Preemptively warm up the fonts’ origin.
+  -
+  - 2. Initiate a high-priority, asynchronous fetch for the CSS file. Works in
+  -    most modern browsers.
+  -
+  - 3. Initiate a low-priority, asynchronous fetch that gets applied to the page
+  -    only after it’s arrived. Works in all browsers with JavaScript enabled.
+  -
+  - 4. In the unlikely event that a visitor has intentionally disabled
+  -    JavaScript, fall back to the original method. The good news is that,
+  -    although this is a render-blocking request, it can still make use of the
+  -    preconnect which makes it marginally faster than the default.
+  -->
+<!-- [1] -->
+<link rel="preconnect"
+      href="https://fonts.gstatic.com"
+      crossorigin />
+<!-- [2] -->
+<link rel="preload"
+      as="style"
+      href="$CSS&display=swap" />
+<!-- [3] -->
+<link rel="stylesheet"
+      href="$CSS&display=swap"
+      media="print" onload="this.media='all'" />
+<!-- [4] -->
+<noscript>
+  <link rel="stylesheet"
+        href="$CSS&display=swap" />
+</noscript>
+```
+
+<span class="commentary">上面代码中的 `$CSS` 在使用时要替换成类似于 `https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,700;1,400;1,700` 这样的实例。</span>
+
+我需要使用的代码是：
+
+```html
+<link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&family=Noto+Sans:ital,wght@0,400;0,700;1,400;1,700&family=Noto+Serif:ital,wght@0,400;0,700;1,400;1,700&family=Noto+Sans+SC:wght@100;300;400;500;700;900&family=Noto+Serif+SC:wght@200;300;400;500;600;700;900&display=swap" rel="stylesheet">
+```
+
+配套的样式为：
+
+```css
+font-family: 'Fira Code', monospace;
+font-family: 'Noto Sans SC', sans-serif;
+font-family: 'Noto Serif SC', serif;
+```
+
+搭配上 loli.net 的 CDN，按照 Harry Roberts 建议，可以把代码写成：
+
+```html
+<link rel="preconnect" href="https://gstatic.loli.net" crossorigin>
+<link rel="preload" as="style" href="https://fonts.loli.net/css2?family=Fira+Code:wght@300;400;500;600;700&family=Noto+Sans:ital,wght@0,400;0,700;1,400;1,700&family=Noto+Serif:ital,wght@0,400;0,700;1,400;1,700&family=Noto+Sans+SC:wght@100;300;400;500;700;900&family=Noto+Serif+SC:wght@200;300;400;500;600;700;900&display=swap&display=swap">
+<link rel="stylesheet" href="https://fonts.loli.net/css2?family=Fira+Code:wght@300;400;500;600;700&family=Noto+Sans:ital,wght@0,400;0,700;1,400;1,700&family=Noto+Serif:ital,wght@0,400;0,700;1,400;1,700&family=Noto+Sans+SC:wght@100;300;400;500;700;900&family=Noto+Serif+SC:wght@200;300;400;500;600;700;900&display=swap&display=swap" media="print" onload="this.media='all'">
+<noscript>
+  <link rel="stylesheet" href="https://fonts.loli.net/css2?family=Fira+Code:wght@300;400;500;600;700&family=Noto+Sans:ital,wght@0,400;0,700;1,400;1,700&family=Noto+Serif:ital,wght@0,400;0,700;1,400;1,700&family=Noto+Sans+SC:wght@100;300;400;500;700;900&family=Noto+Serif+SC:wght@200;300;400;500;600;700;900&display=swap&display=swap">
+</noscript>
+```
+
+中国科技大学也做了 Google Fonts 的代理服务，具体对应关系为：
+
+| 原始地址 | 代理地址 |
+| -------- | -------- |
+| fonts.googleapis.com         | fonts.lug.ustc.edu.cn
+| ajax.googleapis.com          | ajax.lug.ustc.edu.cn
+| themes.googleusercontent.com | google-themes.lug.ustc.edu.cn
+| fonts.gstatic.com            | fonts-gstatic.lug.ustc.edu.cn
+
+故也可使用如下代码对 Google Fonts 实施加速：
+
+```html
+<link rel="preconnect" href="fonts-gstatic.lug.ustc.edu.cn" crossorigin>
+<link rel="preload" as="style" href="https://fonts.lug.ustc.edu.cn/css2?family=Fira+Code:wght@300;400;500;600;700&family=Noto+Sans:ital,wght@0,400;0,700;1,400;1,700&family=Noto+Serif:ital,wght@0,400;0,700;1,400;1,700&family=Noto+Sans+SC:wght@100;300;400;500;700;900&family=Noto+Serif+SC:wght@200;300;400;500;600;700;900&display=swap&display=swap">
+<link rel="stylesheet" href="https://fonts.lug.ustc.edu.cn/css2?family=Fira+Code:wght@300;400;500;600;700&family=Noto+Sans:ital,wght@0,400;0,700;1,400;1,700&family=Noto+Serif:ital,wght@0,400;0,700;1,400;1,700&family=Noto+Sans+SC:wght@100;300;400;500;700;900&family=Noto+Serif+SC:wght@200;300;400;500;600;700;900&display=swap&display=swap" media="print" onload="this.media='all'">
+<noscript>
+  <link rel="stylesheet" href="https://fonts.lug.ustc.edu.cn/css2?family=Fira+Code:wght@300;400;500;600;700&family=Noto+Sans:ital,wght@0,400;0,700;1,400;1,700&family=Noto+Serif:ital,wght@0,400;0,700;1,400;1,700&family=Noto+Sans+SC:wght@100;300;400;500;700;900&family=Noto+Serif+SC:wght@200;300;400;500;600;700;900&display=swap&display=swap">
+</noscript>
+```
+
+**参考资料**
+
+- [《前端 CDNJS 库及 Google Fonts、Ajax 和 Gravatar 国内加速服务》，郭秀峰，2018-08-18。](https://sb.sb/blog/css-cdn/)  
+  [https://sb.sb/blog/css-cdn/](https://sb.sb/blog/css-cdn/)
+- [《最快的 Google Fonts》，Harry Roberts，王强译，2020-05-19。](https://cloud.tencent.com/developer/news/643958)  
+  [https://www.infoq.cn/article/FVV9eEYjr3F8Tov2qYqP](https://www.infoq.cn/article/FVV9eEYjr3F8Tov2qYqP)
+- [《国内外优秀前端 CDN，Google Fonts 国内镜像》，占奇，2017-04-25。](https://zhanqi.net/post/170425/)  
+  [https://zhanqi.net/post/170425/](https://zhanqi.net/post/170425/)
+- [《LUG@USTC Google Fonts 加速服务》，杨博远，2014-12-17。](https://lug.ustc.edu.cn/wiki/lug/services/googlefonts)  
+  [https://lug.ustc.edu.cn/wiki/lug/services/googlefonts](https://lug.ustc.edu.cn/wiki/lug/services/googlefonts)
+- [《Google 字体加速添加缓存》，高一凡，2015-09-24。](https://servers.ustclug.org/2015/09/google-revproxy-add-cache/)  
+  [https://servers.ustclug.org/2015/09/google-revproxy-add-cache/](https://servers.ustclug.org/2015/09/google-revproxy-add-cache/)
+- [《隆重介绍 思源黑体：一款Pan-CJK 开源字体》，Caleb Belohlavek，2014-07-15。](https://blog.typekit.com/alternate/source-han-sans-chs/)  
+  [https://blog.typekit.com/alternate/source-han-sans-chs/](https://blog.typekit.com/alternate/source-han-sans-chs/)
+- [《Source Han Serif 思源宋体：开源的泛 CJK 字体》，Adobe Systems Incorporated，2017。](https://source.typekit.com/source-han-serif/cn/)  
+  [https://source.typekit.com/source-han-serif/cn/](https://source.typekit.com/source-han-serif/cn/)
+- [《关于如何在网页中引入思源字体：漫谈 Typekit》，Jad，2018-07-02。](https://imjad.cn/archives/lab/how-to-introduce-source-han-fonts-into-web-pages-through-typekit/)  
+  [https://imjad.cn/archives/lab/how-to-introduce-source-han-fonts-into-web-pages-through-typekit/](https://imjad.cn/archives/lab/how-to-introduce-source-han-fonts-into-web-pages-through-typekit/)
+- [《走近 90 后创业者》，若涵，2014-03-28。](http://tech.sina.com.cn/i/special/startup90/)  
+  [http://tech.sina.com.cn/i/special/startup90/](http://tech.sina.com.cn/i/special/startup90/)
+
+## 2020-07-30
+
+查资料的时候意外（又）注意到了 jsDelivr，研究了一下，了解到它可以给任何 GitHub 上的文件提供免费的 CDN 加速。
+
+比如说，要用 jsDelivr 给 GitHub 上的某张图片加速，只需要使用 <span class="paths">https://cdn.jsdelivr.net/gh/用户名/图床仓库名/图片路径</span> 引用这张图片就行了。
+
+一个具体的例子——
+
+GitHub 的原始链接是这样的：
+
+<span class="paths">https://raw.githubusercontent.com/shen-huang/img/master/2020-07/Visual_Studio_Code_Main_page.png</span>
+
+对应的 jsDelivr 的加速链接则是这个：
+
+<span class="paths">https://cdn.jsdelivr.net/gh/shen-huang/img/2020-07/Visual_Studio_Code_Main_page.png</span>
+
+或者添加了版本的这个：
+
+<span class="paths">https://cdn.jsdelivr.net/gh/shen-huang/img@master/2020-07/Visual_Studio_Code_Main_page.png</span>
+
+如果设置了 Release 的版本，还可以引用对应版本的文件。
+
+**参考资料**
+
+- [《GitHub + jsDelivr + PicGo 打造稳定快速、高效免费图床》，TRHX，2019-08-01。](https://www.itrhx.com/2019/08/01/A27-image-hosting/)  
+  [https://www.itrhx.com/2019/08/01/A27-image-hosting/](https://www.itrhx.com/2019/08/01/A27-image-hosting/)
+- [《用 GitHub + PicGo + jsDelivr 打造高效的写作工作流，发布全平台》，Mask，2020-01-11。](https://www.jianshu.com/p/a78f558a74dc)  
+  [https://www.jianshu.com/p/a78f558a74dc](https://www.jianshu.com/p/a78f558a74dc)
+- [《记一下 jsDelivr 踩的坑》，石运鸿，2020-03-15。](https://blog.shiyunhong.com/3353.html)  
+  [https://blog.shiyunhong.com/3353.html](https://blog.shiyunhong.com/3353.html)
+- [《jsdelivr 加速资源加载：raw.github 被 ban 之后如何访问 GitHub 资源》，单林敏，2020-03-12。](https://blog.csdn.net/neve_give_up_dan/article/details/104817638)  
+  [https://blog.csdn.net/neve_give_up_dan/article/details/104817638](https://blog.csdn.net/neve_give_up_dan/article/details/104817638)
+
+## 2020-07-29
+
+研究了一下 Jekyll、Hexo、Hugo，考虑将来用 Hugo 搭个 Blog。
+
+**参考资料**
+
+- [《Jekyll / Hugo / Hexo 比较》，曹历鑫，2019-10-30。](https://lexcao.github.io/zh/posts/jekyll-hugo-hexo)  
+  [https://lexcao.github.io/zh/posts/jekyll-hugo-hexo](https://lexcao.github.io/zh/posts/jekyll-hugo-hexo)
+- [Hugo Themes](https://themes.gohugo.io)  
+  [https://themes.gohugo.io](https://themes.gohugo.io)
+
+<!-- 
+Fox.ONE 的大群机器人新增了视频直播回看的功能，我看了一下源代码，发现视频是 blob 加密的，好在可以直接打开开发工具、刷新页面、从 Network 分页里搜索“m3u8”找到原始链接，跟着用个 M3U8 的下载工具（我用的是稞麦）下载就行了。
+
+**参考资料**
+
+- [《下载blob加密的视频以及m3u8下载姿势合集》，yamakuchi，2019-05-11。](https://zhuanlan.zhihu.com/p/65425801)  
+  [https://zhuanlan.zhihu.com/p/65425801](https://zhuanlan.zhihu.com/p/65425801)
+- [《下载 blob视频, 如何下载网站中的blob:https:// 视频》，Gideon，2019-10-04。](https://justcode.ikeepstudying.com/2019/10/%E4%B8%8B%E8%BD%BD-blob%E8%A7%86%E9%A2%91-%E5%A6%82%E4%BD%95%E4%B8%8B%E8%BD%BD%E7%BD%91%E7%AB%99%E4%B8%AD%E7%9A%84blobhttps-%E8%A7%86%E9%A2%91/)  
+  [https://justcode.ikeepstudying.com/2019/10/下载-blob视频-如何下载网站中的blobhttps-视频/](https://justcode.ikeepstudying.com/2019/10/%E4%B8%8B%E8%BD%BD-blob%E8%A7%86%E9%A2%91-%E5%A6%82%E4%BD%95%E4%B8%8B%E8%BD%BD%E7%BD%91%E7%AB%99%E4%B8%AD%E7%9A%84blobhttps-%E8%A7%86%E9%A2%91/)
+ -->
+
+## 2020-07-28
+
+写《设置 Visual Studio Code》，把写代码用的字体又整理了一遍，期间我注意到了一个有意思的字体：Input。
+
+Input 由 [David Jonathan Ross](https://djr.com/) 设计，[设计师制作的展示页面（https://djr.com/input/）](https://djr.com/input/)上有很全的展示，[发行方制作的介绍页面（https://input.fontbureau.com/）](https://input.fontbureau.com/)上有灵活的预览和完整的下载（私人使用是免费的，公众使用要付授权费）。
+
+David Jonathan Ross 提出了
+
+## 2020-07-27
+
+有些图片需要加个标题，为了醒目，我设计给标题配上和图片一样宽的灰色底色，紧贴在图片下方，左边再加个深色的竖线。落实的时候，标题总是和图片有个间距，把图片和标题的 `padding` 和 `margin` 手动设置成 `0` 都不行，查了一阵子资料，忽然想到，还可以设置成负值，将 `margin-top` 设置成了 `-1.65em` 后实现了最初的目的。
+
+从他人处引用的图片还需要标注来源，为了好看，我给来源另外设了个样式，把它放在了标题行的右端。
+
+尺寸不大的图片可能会和下方的标题不太搭，为了协调，可以考虑给这样的图片加个背景，为此单独设置了一个样式。为了使用这个样式，需要搭配 `<p>` 和 `<img>` 标签，不能直接使用 Markdown 的图片相关语法。如：
+
+```html
+<p class="figwithback">
+  <img src="https://raw.githubusercontent.com/shen-huang/img/master/2020-07/Bad_Code_Font.png" alt="不恰当的代码字体选择" />
+</p>
+```
+
+添加了背景的图片可能会导致标题被背景遮盖，为标题的样式设置了 `position: relative;` 和 `z-index: 100;`。
+
+与此相关的规则集：
+
+```css
+.figtitle {
+    position: relative;
+    z-index: 100;
+    margin-top: -1.65em;
+    margin-bottom: 1em;
+    padding: 2px 0 2px 10px;
+    border-left: 5px solid rgba(0, 0, 0, 0.3);
+    background-color: rgba(0, 0, 0, 0.1);
+    font-size: 0.9em;
+    color: rgba(0, 0, 0, 0.7);
+}
+
+.figtitlevia {
+    float: right;
+    padding-right: 10px;
+}
+
+.figwithback {
+    background-color: var(--code-theme-background);
+}
+```
+
+过去放在 GitBook 上的笔记的库虽然已经删了，但本地文件的 Git 远程关联还在，这导致了一点混淆。在 Windows Terminal 里使用
+```shell
+git remote remove origin
+```
+移除了远程关联。
+
+如果需要添加远程关联，可以使用
+```shell
+git remote add origin git@github.com:git_username/repository_name.git
+```
+
+明确了“不忍卒读”和“难以卒读”的分别（前者褒义后者贬义）。
+
+**参考资料**
+
+- [《CSS 世界》，张鑫旭，北京：人民邮电出版社，2017-12-01。](https://www.epubit.com/bookDetails?id=N2983)  
+  [https://www.epubit.com/bookDetails?id=N2983](https://www.epubit.com/bookDetails?id=N2983)
+- [《iCSS<span class="chs">·</span>谈谈一些有趣的CSS题目（1）——左边框的多种实现方式》，ChokCoco，2019-03-18。](https://github.com/chokcoco/iCSS/issues/51)  
+  [https://github.com/chokcoco/iCSS/issues/51](https://github.com/chokcoco/iCSS/issues/51)
+- [《Web 开发技术<span class="chs">·</span>CSS（层叠样式表）<span class="chs">·</span>z-index》，Mozilla 贡献者，2020-07-02。](https://developer.mozilla.org/zh-CN/docs/Web/CSS/z-index)  
+  [https://developer.mozilla.org/zh-CN/docs/Web/CSS/z-index](https://developer.mozilla.org/zh-CN/docs/Web/CSS/z-index)
+- [《CSS：你真的会用 z-index 吗？》，WebJ2EE，2019-05-30。](https://juejin.im/post/5cee53f9f265da1bbd4b5746)  
+  [https://juejin.im/post/5cee53f9f265da1bbd4b5746](https://juejin.im/post/5cee53f9f265da1bbd4b5746)
+- [《Pro Git (2nd Edition)<span class="chs">·</span>2.5 Git 基础 - 远程仓库的使用》，Scott Chacon，Ben Straub，2014。](https://git-scm.com/book/zh/v2/Git-%E5%9F%BA%E7%A1%80-%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8)  
+  [https://git-scm.com/book/zh/v2/Git-基础-远程仓库的使用](https://git-scm.com/book/zh/v2/Git-%E5%9F%BA%E7%A1%80-%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93%E7%9A%84%E4%BD%BF%E7%94%A8)
+- [git-remote, In *Reference of Git*. Retrieved 2020-07-28.](https://git-scm.com/docs/git-remote)  
+  [https://git-scm.com/docs/git-remote](https://git-scm.com/docs/git-remote)
+- [《git 中本地与远程库的关联与取消》，WuShiyuan，2016-01-24。](https://blog.csdn.net/wsycsdn19930512/article/details/50574217)  
+  [https://blog.csdn.net/wsycsdn19930512/article/details/50574217](https://blog.csdn.net/wsycsdn19930512/article/details/50574217)
+- [《成语运用二则：“不忍卒读”“不赞一词”》，赵丕杰，语文建设，2011年第1期。](http://www.yuyingchao.com/beike/html_qikan/yuwenjianshe_6/138959.html)  
+  [http://www.yuyingchao.com/beike/html_qikan/yuwenjianshe_6/138959.html](http://www.yuyingchao.com/beike/html_qikan/qikanlunwen_138959.html)
+
+## 2020-07-26
+
+这个页面越写越长了，我想把它拆分一下，就建立了个文件夹，按天建立了一系列 Markdown 文件，结果导航栏变得相当难看。调试了一会儿没能搞定，只好退回了原有的版本。
+
+考虑到可能只是暂时搁置，我没有删掉新建的文件夹和文件，而是在根目录新建了一个 <span class="paths">.gitignore</span> 文件，把现在不用的文件夹写了进去，避免将其上传到 GitHub。
+
+由于间隔号（<span class="chs">·</span>）在<span class="typo-em">默认状态</span>下会用英文字体呈现，看上去不大美观，特别新增了一个样式 `.chs` 用来强制将某些文字使用中文字体呈现。
+
+在折腾间隔号的时候，看到了“[漢字標準格式](https://hanzi.pro/)”（陳奕鈞 等，2015-10-27）、“[中文网页重设与排版：typo.css](https://typo.sofi.sh/)”（林建锋〔Sofish Lin〕，2019-01-21）等中文样式的优化方案，继而注意到了 [The Type (Type is Beautiful)](https://www.thetype.com/) 网站对超链接的处理——超链接文字颜色与正文基本一致，加灰色下划线进行标注，鼠标悬停时加深文字和下划线的颜色。对比所有超链接都用不同颜色加以修饰的做法，The Type 最后呈现的效果显得干净清晰又不突兀。
+
+为了搞清楚要改什么地方，我做了一系列的样式跟踪，最后调整了主题当中 `--link-border-bottom`、 `--link-border-bottom--hover`、 `--link-color`、 `--link-color--hover` 几项的设置，另外给 `a` 和 `a:hover` 增加了样式，加大了 `padding-bottom`，完成后的观感还算令人满意。
+
+在“[中文网页重设与排版：typo.css](https://typo.sofi.sh/)”处学到了着重号的设置方法，添加了 `.typo-em` 和 `.typo-em:after` 样式，实现了给中文加<span class="typo-em">着重号</span>的效果。
+
+**参考资料**
+
+- [《Git 教程<span class="chs">·</span>自定义 Git<span class="chs">·</span>忽略特殊文件》，廖雪峰，\[2020-07-26\]。](https://www.liaoxuefeng.com/wiki/896043488029600/900004590234208)  
+  [https://www.liaoxuefeng.com/wiki/896043488029600/900004590234208](https://www.liaoxuefeng.com/wiki/896043488029600/900004590234208)
+- [《为什么在有些软件环境下中文里的中圆点（间隔号）是半角的？》，梁海，2014-11-26。](https://www.zhihu.com/question/20271115/answer/14565424)  
+  [https://www.zhihu.com/question/20271115/answer/14565424](https://www.zhihu.com/question/20271115/answer/14565424)
+- [《GB/T 15834—2011 标点符号用法》，中华人民共和国国家质量监督检验检疫总局，2011-12-30。](http://www.moe.gov.cn/ewebeditor/uploadfile/2015/01/13/20150113091548267.pdf)  
+  [http://www.moe.gov.cn/ewebeditor/uploadfile/2015/01/13/20150113091548267.pdf](http://www.moe.gov.cn/ewebeditor/uploadfile/2015/01/13/20150113091548267.pdf)
+- [《HTML 下划线》，蓝蓝，2019-12-17。](https://lanlan2017.github.io/blog/9f0a034b/)  
+  [https://lanlan2017.github.io/blog/9f0a034b/](https://lanlan2017.github.io/blog/9f0a034b/)
+- [《零宽度字符：和谐？屏蔽？不存在的》，Yuan Fu，2018-09-03。](https://juejin.im/post/5b87a6e26fb9a019b953ee8b)  
+  [https://juejin.im/post/5b87a6e26fb9a019b953ee8b](https://juejin.im/post/5b87a6e26fb9a019b953ee8b)
+- [《饿了么如何落地和管理「大前端」团队？》，林建锋，2017/3/17。](https://sofi.sh/p/%E9%A5%BF%E4%BA%86%E4%B9%88%E5%A6%82%E4%BD%95%E8%90%BD%E5%9C%B0%E5%92%8C%E7%AE%A1%E7%90%86%E3%80%8C%E5%A4%A7%E5%89%8D%E7%AB%AF%E3%80%8D%E5%9B%A2%E9%98%9F%EF%BC%9F/)  
+  [https://sofi.sh/p/饿了么如何落地和管理「大前端」团队？/](https://sofi.sh/p/%E9%A5%BF%E4%BA%86%E4%B9%88%E5%A6%82%E4%BD%95%E8%90%BD%E5%9C%B0%E5%92%8C%E7%AE%A1%E7%90%86%E3%80%8C%E5%A4%A7%E5%89%8D%E7%AB%AF%E3%80%8D%E5%9B%A2%E9%98%9F%EF%BC%9F/)
+- [g0v 零&#8203;時&#8203;政&#8203;府](https://g0v.tw/zh-TW/)  
+  [https://g0v.tw](https://g0v.tw/zh-TW/)
+- [萌典](https://www.moedict.tw/)  
+  [https://www.moedict.tw](https://www.moedict.tw/)
+
 ## 2020-07-23
 
 把之前所有值得记录一下的内容都补上了。
@@ -14,7 +318,7 @@
 
 ## 2020-07-20
 
-2020 年 1 月 15 日，微软正式推出了以 Chromium 为内核的新版 Microsoft Edge。我想使用新版的 Edge，又不想就此抛弃 EdgeHTML 内核，就没有使用直接升级的办法，而是使用了 [PortableSoft][] 提供的基于启动器的 [Microsoft Edge 绿色版](https://www.portablesoft.org/microsoft-edge-portable/)（此处为最新版，过去的版本可以在“[Microsoft Edge 历史版本/旧版本下载](https://www.portablesoft.org/microsoft-edge-old-version/)”页面下载）。
+2020 年 1 月 15 日，微软正式推出了以 Chromium 为内核的新版 Microsoft Edge。我想使用新版的 Edge，又不想就此抛弃 EdgeHTML 内核的旧版 Edge，就没有使用直接升级的办法，而是使用了 [PortableSoft][] 提供的基于启动器的 [Microsoft Edge 绿色版](https://www.portablesoft.org/microsoft-edge-portable/)（此处为最新版，过去的版本可以在“[Microsoft Edge 历史版本/旧版本下载](https://www.portablesoft.org/microsoft-edge-old-version/)”页面下载）。
 
 近几日 Edge 一直提示我要升级，PortableSoft 的这个启动器没有提供自动升级功能，只能下载新版手工处理升级，处理之余，我翻了翻 PortableSoft，发现这个站也把其提供的 [ABBYY FineReader PDF](https://pdf.abbyy.com/) 的链接换成了思杰马克丁的版本，估计可能是因为想避免麻烦。
 
@@ -180,7 +484,7 @@ git add . ; git commit -m"说明" ; git push origin master
   [https://www.kenming.idv.tw/about_gitbook-v2_and_gitlab_alternative/](https://www.kenming.idv.tw/about_gitbook-v2_and_gitlab_alternative/)
 - [《CSS中的 “var()” 和 “:root”》，ArvinWoo，2018-11-26。](https://blog.csdn.net/qq_37595946/article/details/84531311)  
   [https://blog.csdn.net/qq_37595946/article/details/84531311](https://blog.csdn.net/qq_37595946/article/details/84531311)
-- [《var()》，Mozilla 贡献者，2019-11-13。](https://developer.mozilla.org/zh-CN/docs/Web/CSS/var)  
+- [《Web 开发技术<span class="chs">·</span>CSS（层叠样式表）<span class="chs">·</span>var()》，Mozilla 贡献者，2019-11-13。](https://developer.mozilla.org/zh-CN/docs/Web/CSS/var)  
   [https://developer.mozilla.org/zh-CN/docs/Web/CSS/var](https://developer.mozilla.org/zh-CN/docs/Web/CSS/var)
 
 ## 2020-07-16

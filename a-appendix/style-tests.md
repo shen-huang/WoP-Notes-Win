@@ -26,6 +26,20 @@
 ```
 <span class="paths">%SystemRoot%\System32\\</span>
 
+## 中文标点
+
+```html
+<span class="chs">·</span>
+```
+<span class="chs">·</span>
+
+## 着重号
+
+```html
+<span class="typo-em">字下加点</span>
+```
+<span class="typo-em">字下加点</span>
+
 ## 注释
 
 ```html
