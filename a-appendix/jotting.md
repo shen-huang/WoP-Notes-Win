@@ -6,7 +6,7 @@
 
 发现了一个使用零宽字符（零宽空格、零宽连字、零宽不连字）在文章中藏匿信息的方法，具体操作可见 Jad 在 2018 年 4 月 13 日发布的[《我仔细看了半天，才从字缝里看出字来……》](https://imjad.cn/archives/code/hide-text-typecho-plugin/)一文。
 
-另外明确了一下，不要使用“H5”来简称“HTML5”，细节可见“JS小组”在 2015 年 7 月 5 日发布的[《为何不要用「h5」这个简称？》](https://mp.weixin.qq.com/s/AZ4gKhPRmIV2poHgURbVYA)一文。
+另外明确了一下，不要使用“H5”来简称“HTML5”，细节可见 [JS小组](https://weibo.com/baidujs) 在 2015 年 7 月 5 日发布的[《为何不要用「h5」这个简称？》](https://mp.weixin.qq.com/s/AZ4gKhPRmIV2poHgURbVYA)一文。
 
 **参考资料**
 

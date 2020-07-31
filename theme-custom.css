@@ -283,8 +283,9 @@
 :root {
 	--base-background-color: #fafafa;
 	--base-color: var(--mono-shade5);
-	--base-font-family: -apple-system, BlinkMacSystemFont, "Noto Serif", , Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Sans SC", "Source Han Sans SC", "Source Han Sans CN", "Microsoft Yahei", 微软雅黑, sans-serif;
-	--base-font-size: 16px;
+	/* --base-font-family: -apple-system, BlinkMacSystemFont, "Noto Sans", "Segoe UI", Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Sans SC", "Source Han Sans SC", "Source Han Sans CN", "Microsoft Yahei", sans-serif; */
+	--base-font-family: -apple-system, BlinkMacSystemFont, "Noto Serif SC", "Noto Sans", "Segoe UI", Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Sans SC", "Source Han Sans SC", "Source Han Sans CN", "Microsoft Yahei", sans-serif;
+	--base-font-size: 18px;
 	--base-font-weight: normal;
 	--base-line-height: 1.7;
 	--emoji-size: calc(var(--base-line-height) * 1em);
