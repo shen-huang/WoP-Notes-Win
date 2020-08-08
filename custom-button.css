@@ -89,7 +89,8 @@ pre .val {color: #e6db74;} /* value */
 	font-weight: 300;
 }
 .btn, .btn-two {
-    font-weight: 700;
+	font-family: var(--font-hei);
+    font-weight: 500;
 	margin: 0px 5px;
 }
 .btn-gradient {
@@ -118,7 +119,7 @@ button[class*="btn"] {border: 0;}
 .btn-gradient.mini, 
 .btn-effect.mini {
   padding: 1px 7px;  
-  font-size: 0.9em;
+  font-size: 1em;
 }
 .btn.block, 
 .btn-two.block, 

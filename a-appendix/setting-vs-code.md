@@ -7,7 +7,7 @@ Visual Studio Code（简称 VS Code）是功能非常丰富的一个开源现代
 
 ![Visual Studio Code 主页][Visual_Studio_Code_Main_page]
 
-访问 [Visual Studio Code 的主页][]（[https://code.visualstudio.com](https://code.visualstudio.com/)），点击<button class="btn blue mini">Download for Windows</button>即可下载安装文件，下载完成后，运行并按默认设置完成安装即可。
+访问 [Visual Studio Code 的主页][]（<a href="https://code.visualstudio.com"><span class="paths">https://code.visualstudio.com/</span></a>），点击<button class="btn blue mini">Download for Windows</button>即可下载安装文件，下载完成后，运行并按默认设置完成安装即可。
 
 启动 VS Code 后，会显示欢迎页——
 
@@ -111,7 +111,7 @@ for c in (65, 97):                          # 这部分负责将字符串
 
 - 字体排序要按想要选择的顺序来设置，不同的字体间要用 `,` 隔开；
 - 如果字体名称里有空格，那么要在字体名称的左右两边加上 `'` ；
-- 中文字体可能需要使用对应的英文字体名（可参考[张鑫旭](https://www.zhangxinxu.com/life/about/) 2017 年 3 月 25 日发布的[《CSS font-family 常见中文字体对应的英文名称》](https://www.zhangxinxu.com/wordpress/2017/03/css-font-family-chinese-english/)一文）。
+- 中文字体可能需要使用对应的英文字体名称。
 
 VS Code 默认的首选英文字体为 <span style="font-family: Consolas, monospace;">Consolas</span>，这是微软专门为代码显示设计的一款等宽字体，在大部分时间都挺合用的，但一混上中文情况就不妙了，由于 <span style="font-family: Consolas, sans-serif;">Consolas</span> 本身没有中文部分，其后的 <span style="font-family: 'Courier New', monospace;">Courier New</span> 也显示不出中文，跟着就是 <span style="font-family: monospace;">monospace</span>，这在简体中文版 Windows 10 上很可能会落到系统自带的“<span style="font-family: SimSun, STSong, monospace;">宋体</span>”上，也就会令 VS Code 默认使用<span style="font-family: SimSun, STSong, serif;">宋体</span>来显示中文，这看上去就不大协调。
 
@@ -137,7 +137,7 @@ VS Code 默认的首选英文字体为 <span style="font-family: Consolas, monos
 
 <div class="figtitle">VS Code 使用 Yahei Source Code Pro 字体</div>
 
-专门针对多语种混合对齐这一目的制作的[“等距更纱黑体”（`'Sarasa Term SC'`）](https://github.com/be5invis/Sarasa-Gothic)，对齐倒是很完美，但英文部分我觉得太窄了，看着有些累。
+专门针对多语种混合对齐这一目的制作的[“等距更纱黑体”](https://github.com/be5invis/Sarasa-Gothic)，对齐倒是很完美，但英文部分我觉得太窄了，看着有些累。
 
 ![][Visual_Studio_Code_Sarasa_Term_SC]
 
@@ -151,7 +151,9 @@ VS Code 默认的首选英文字体为 <span style="font-family: Consolas, monos
 
 Fira Code 字体满足写代码的各种需求，它还有一个额外的设计：提供了代码领域专用的“[合字（ligature）](https://zh.wikipedia.org/wiki/%E5%90%88%E5%AD%97)”。
 
-所谓“合字”，就是把两个甚至数个特定字符自动替换为另外的字符，如将“`->`”自动替换为“`→`”。具体效果可以参考官方的对比图：
+<!-- 所谓“合字”，就是把两个甚至数个特定字符自动替换为另外的字符，如将“<code style="font-family: Inconsolata, Consolas, Menlo, Monaco, 'Andale Mono WT', 'Andale Mono', 'Lucida Console', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', 'Courier New', Courier,  monospace">-></code>”自动替换为“<code><img src="https://raw.githubusercontent.com/shen-huang/img/master/2020-07/Fira_Code_Arrow_Ligature.svg?sanitize=true" alt="Fira Code Arrow Ligature" height=10.5px></code>”。具体效果可以参考官方的对比图： -->
+
+所谓“合字”，就是把两个甚至数个特定字符自动替换为另外的字符，如将“<code style="font-family: Inconsolata, Consolas, Menlo, Monaco, 'Andale Mono WT', 'Andale Mono', 'Lucida Console', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', 'Courier New', Courier,  monospace">-></code>”自动替换为“`⟶`”。具体效果可以参考[官方的对比图](https://github.com/tonsky/FiraCode#whats-in-the-box)：
 
 ![](https://raw.githubusercontent.com/shen-huang/FiraCode/master/extras/ligatures.png)
 
@@ -169,16 +171,31 @@ Fira Code 字体满足写代码的各种需求，它还有一个额外的设计�
 
 ![][Visual_Studio_Code_Settings_Font_Ligatures_true]
 
-在中文字体部分，很多人会习惯性地使用“微软雅黑”，但我觉得微软雅黑有个小问题：它的有些标点设计区分度不足，比如全宽的双引号（<code><span style="font-family: 'Microsoft Yahei', sans-serif;">“</span></code> 和 <code><span style="font-family: 'Microsoft Yahei', sans-serif;">”</span></code>），单引号（<code><span style="font-family: 'Microsoft Yahei', sans-serif;">‘</span></code> 和 <code><span style="font-family: 'Microsoft Yahei', sans-serif;">’</span></code>）间就很可能难以区分，如果再混上半宽的 <code><span style="font-family: 'Microsoft Yahei', sans-serif;">"</span></code>、<code><span style="font-family: 'Microsoft Yahei', sans-serif;">'</span></code>、<code><span style="font-family: 'Microsoft Yahei', sans-serif;">`</span></code>，可就会导致混乱；常用的全宽的 <code><span style="font-family: 'Microsoft Yahei', sans-serif;">，</span></code>、<code><span style="font-family: 'Microsoft Yahei', sans-serif;">：</span></code>、<code><span style="font-family: 'Microsoft Yahei', sans-serif;">；</span></code>等符号也存在可能不易看清的问题。
+在中文字体部分，很多人会习惯性地使用“微软雅黑”，但我觉得微软雅黑有个小问题：它的有些标点设计区分度不足，比如全宽的双引号（<code><span style="font-family: 'Microsoft Yahei', sans-serif;">“</span></code> 和 <code><span style="font-family: 'Microsoft Yahei', sans-serif;">”</span></code>），单引号（<code><span style="font-family: 'Microsoft Yahei', sans-serif;">‘</span></code> 和 <code><span style="font-family: 'Microsoft Yahei', sans-serif;">’</span></code>）间就很可能难以区分，如果再混上半宽的 <code><span style="font-family: 'Microsoft Yahei', sans-serif;">"</span></code>、<code><span style="font-family: 'Microsoft Yahei', sans-serif;">'</span></code>、<code><span style="font-family: 'Microsoft Yahei', sans-serif;">`</span></code>、<code><span style="font-family: 'Microsoft Yahei', sans-serif;">′</span></code>、<code><span style="font-family: 'Microsoft Yahei', sans-serif;">″</span></code>，可能就会导致混乱；常用的全宽的 <code><span style="font-family: 'Microsoft Yahei', sans-serif;">，</span></code>、<code><span style="font-family: 'Microsoft Yahei', sans-serif;">：</span></code>、<code><span style="font-family: 'Microsoft Yahei', sans-serif;">；</span></code> 和半宽的 <code><span style="font-family: 'Microsoft Yahei', sans-serif;">,</span></code>、<code><span style="font-family: 'Microsoft Yahei', sans-serif;">:</span></code>、<code><span style="font-family: 'Microsoft Yahei', sans-serif;">;</span></code> 等符号也存在可能不易看清的问题。
 
-微软雅黑标点的问题，在搭配上 <span style="font-family: Consolas, monospace;">Consolas</span> 或者 <span style="font-family: 'Fira Code', Consolas, monospace;">Fira Code</span> 等字体后会有一定程度的缓解，引号的问题通常就没有了，但
+微软雅黑标点的问题，在搭配上 <span style="font-family: Consolas, monospace;">Consolas</span> 或者 <span style="font-family: 'Fira Code', Consolas, monospace;">Fira Code</span> 等字体后会有一定程度的缓解，引号的问题通常就没有了，但逗号、冒号、分号等的问题还是在的。
 
+经过试验，我感觉和微软雅黑有些渊源关系的[方正兰亭黑](http://www.foundertype.com/index.php/FontInfo/index/id/216.html)和[汉仪旗黑](http://www.hanyi.com.cn/productdetail.php?id=832)可以一用。此外，开源免费的[思源黑体](https://github.com/adobe-fonts/source-han-sans/blob/master/README-CN.md)（该字体由 Adobe 和 Google 联合开发，Google 将其归在了“[Noto 字体系列](https://www.google.com/get/noto/)”，称为“Noto Sans”，针对中文简化字进行适配的版本称为“Noto Sans CJK SC”）的效果也还可以。
 
-设置页面中“Editor: **Font Size**”区域里的数字是控制 VS Code 所用字体的显示尺寸的，如果显示器较大或显示器的像素密度较高，适当调大这个数字可以让眼睛轻松一点。
+给 VS Code 设置中文字体的时候还有一个要注意的事情：可能需要使用字体的英文名称。
 
-<!-- TODO -->
+举几个例子。微软雅黑，可以将字体设置写为“`微软雅黑`”或“`Microsoft Yahei`”；等宽更纱黑体，建议写为“`Sarasa Term SC`”；思源黑体，若使用 Adobe 版的，可以写为“`思源黑体`”或“`Source Han Sans SC`”，但若是使用 Google 版的，就需要写为<wbr>“`Noto Sans CJK SC`”；汉仪旗黑需要带上字重，写成类似“`HYQihei 50S`”、“`HYQihei 55S`”的样子；方正兰亭黑会涉及到字重和编码，需要写成类似“`FZLanTingHei-R-GBK`”的样子。
 
-<!-- 我使用了 Fira Code 和汉仪旗黑的搭配 -->
+更多的字体名称对应关系可参考[张鑫旭](https://www.zhangxinxu.com/life/about/) 2017 年 3 月 25 日专门为此撰写的[《CSS font-family 常见中文字体对应的英文名称》](https://www.zhangxinxu.com/wordpress/2017/03/css-font-family-chinese-english/)一文。文中未涵盖的字体，可以用 [FontForge](https://fontforge.org/en-US/)、[FontCreator](https://www.high-logic.com/font-editor/fontcreator) 等工具，通过读取字体文件中的“字体族”（Typographic Family，该项为空的话则为 Font Family）字段来确认。
+
+<!-- FontCreator 里为 Extended 中的 Typographic Family，该项为空的话则使用 Identification 中的 Font Family -->
+
+我最后选择了 55 字重的汉仪旗黑来搭配 Fire Code。
+
+设置页面中“Editor: **Font Size**”区域里的数字是控制 VS Code 所用字体的显示尺寸的，如果显示器较大或显示器的像素密度较高，适当调大这个数字可以让眼睛轻松一点。我将这一项设置为了 `16`。
+
+![][Visual_Studio_Code_Fira_Code_HYQihei_16]
+
+<div class="figtitle">VS Code 使用字号 16 的 Fira Code 字体和汉仪旗黑字体</div>
+
+![][Visual_Studio_Code_Font_Settings]
+
+<div class="figtitle">VS Code 字体相关设置</div>
 
 ### 主题、图标
 
@@ -238,6 +255,10 @@ https://marketplace.visualstudio.com/items?itemName=Spades.vs-picgo
 [Visual_Studio_Code_Sarasa_Term_SC]: https://cdn.jsdelivr.net/gh/shen-huang/img@master/2020-07/Visual_Studio_Code_Sarasa_Term_SC.png
 [Visual_Studio_Code_Settings_Font_Ligatures]: https://cdn.jsdelivr.net/gh/shen-huang/img@master/2020-07/Visual_Studio_Code_Settings_Font_Ligatures.png
 [Visual_Studio_Code_Settings_Font_Ligatures_true]: https://cdn.jsdelivr.net/gh/shen-huang/img@master/2020-07/Visual_Studio_Code_Settings_Font_Ligatures_true.png
+[Fira_Code_Arrow_Ligature]: https://raw.githubusercontent.com/shen-huang/img/master/2020-07/Fira_Code_Arrow_Ligature.svg?sanitize=true
+[Visual_Studio_Code_Fira_Code_HYQihei_16]: https://cdn.jsdelivr.net/gh/shen-huang/img@master/2020-07/Visual_Studio_Code_Fira_Code_HYQihei_16.png
+[Visual_Studio_Code_Font_Settings]: https://cdn.jsdelivr.net/gh/shen-huang/img@master/2020-07/Visual_Studio_Code_Font_Settings.png
+
 
 [Visual_Studio_Code_Extensions_Theme]: https://cdn.jsdelivr.net/gh/shen-huang/img@master/2020-07/Visual_Studio_Code_Extensions_Theme.png
 [Visual_Studio_Code_Extensions_Theme_Preview]: https://cdn.jsdelivr.net/gh/shen-huang/img@master/2020-07/Visual_Studio_Code_Extensions_Theme_Preview.png
@@ -257,19 +278,23 @@ https://raw.githubusercontent.com/shen-huang/img/master
 
 **参考资料**
 
-- [《让代码看起来更舒服（2）：选择适合的字体》，Windie Chai，2009-11-22。](http://coding.windstyle.cn/make-your-code-more-comfortable-2-select-the-appropriate-font/)  
-  [http://coding.windstyle.cn/make-your-code-more-comfortable-2-select-the-appropriate-font/](http://coding.windstyle.cn/make-your-code-more-comfortable-2-select-the-appropriate-font/)
-- [What is the default serif, sans-serif and monospace font-family for Mac OS X? Jeff, 2012-08-24.](https://webmasters.stackexchange.com/questions/33793/what-is-the-default-serif-sans-serif-and-monospace-font-family-for-mac-os-x)  
-  [https://webmasters.stackexchange.com/questions/33793/what-is-the-default-serif-sans-serif-and-monospace-font-family-for-mac-os-x](https://webmasters.stackexchange.com/questions/33793/what-is-the-default-serif-sans-serif-and-monospace-font-family-for-mac-os-x)
-- [《CSS font-family 詳細介紹》，oxxo，2018-11-30。](https://www.oxxostudio.tw/articles/201811/css-font-family.html)  
-  [https://www.oxxostudio.tw/articles/201811/css-font-family.html](https://www.oxxostudio.tw/articles/201811/css-font-family.html)
-- [《在 VSCode 中使用（汉字）等宽字体》，张慕晖，2018-11-19。](https://zhanghuimeng.github.io/post/using-chinese-monospace-in-vscode/)  
-  [https://zhanghuimeng.github.io/post/using-chinese-monospace-in-vscode/](https://zhanghuimeng.github.io/post/using-chinese-monospace-in-vscode/)
-- [《分享一下自己修改的字体~ Yahei Source Code Pro v1.23》，DeepKolos，2017-07-15。](https://www.jianshu.com/p/28acf9226ddb)  
-  [https://www.jianshu.com/p/28acf9226ddb](https://www.jianshu.com/p/28acf9226ddb)
-- [YaHei Consolas Hybrid 和 Yahei Source Code Pro 的下载页面](https://github.com/yyxyz/OSOperateSkills/find/master)  
-  [https://github.com/yyxyz/OSOperateSkills/find/master](https://github.com/yyxyz/OSOperateSkills/find/master)
-- [更纱黑体主仓库](https://github.com/be5invis/Sarasa-Gothic)  
-  [https://github.com/be5invis/Sarasa-Gothic](https://github.com/be5invis/Sarasa-Gothic)
-- [Iosevka 字体主页](https://typeof.net/Iosevka/)  
-  [https://typeof.net/Iosevka/](https://typeof.net/Iosevka/)
+- [《让代码看起来更舒服（2）：选择适合的字体》，Windie Chai，2009-11-22。](http://coding.windstyle.cn/make-your-code-more-comfortable-2-select-the-appropriate-font/)  <br>
+  <!-- [http://coding.windstyle.cn/make-your-code-more-comfortable-2-select-the-appropriate-font/](http://coding.windstyle.cn/make-your-code-more-comfortable-2-select-the-appropriate-font/) -->
+  <a href="http://coding.windstyle.cn/make-your-code-more-comfortable-2-select-the-appropriate-font/"><span class="paths">http://coding.windstyle.cn/make-your-code-more-comfortable-2-select-the-appropriate-font/</span></a>
+- [What is the default serif, sans-serif and monospace font-family for Mac OS X? Jeff, 2012-08-24.](https://webmasters.stackexchange.com/questions/33793/what-is-the-default-serif-sans-serif-and-monospace-font-family-for-mac-os-x)  <br>
+  <!-- [https://webmasters.stackexchange.com/questions/33793/what-is-the-default-serif-sans-serif-and-monospace-font-family-for-mac-os-x](https://webmasters.stackexchange.com/questions/33793/what-is-the-default-serif-sans-serif-and-monospace-font-family-for-mac-os-x) -->
+  <a href="https://webmasters.stackexchange.com/questions/33793/what-is-the-default-serif-sans-serif-and-monospace-font-family-for-mac-os-x"><span class="paths">https://webmasters.stackexchange.com/questions/33793/what-is-the-default-serif-sans-serif-and-monospace-font-family-for-mac-os-x</span></a>
+- [《CSS font-family 詳細介紹》，oxxo，2018-11-30。](https://www.oxxostudio.tw/articles/201811/css-font-family.html)  <br>
+  <a href="https://www.oxxostudio.tw/articles/201811/css-font-family.html"><span class="paths">https://www.oxxostudio.tw/articles/201811/css-font-family.html</span></a>
+- [《在 VSCode 中使用（汉字）等宽字体》，张慕晖，2018-11-19。](https://zhanghuimeng.github.io/post/using-chinese-monospace-in-vscode/)  <br>
+  <a href="https://zhanghuimeng.github.io/post/using-chinese-monospace-in-vscode/"><span class="paths">https://zhanghuimeng.github.io/post/using-chinese-monospace-in-vscode/</span></a>
+- [《获取中文字体的英文名字》，Xrated，2018-05-17。](https://zhuanlan.zhihu.com/p/36984949)  <br>
+  <a href="https://zhuanlan.zhihu.com/p/36984949"><span class="paths">https://zhuanlan.zhihu.com/p/36984949</span></a>
+- [《分享一下自己修改的字体~ Yahei Source Code Pro v1.23》，DeepKolos，2017-07-15。](https://www.jianshu.com/p/28acf9226ddb)  <br>
+  <a href="https://www.jianshu.com/p/28acf9226ddb"><span class="paths">https://www.jianshu.com/p/28acf9226ddb</span></a>
+- [YaHei Consolas Hybrid 和 Yahei Source Code Pro 的下载页面](https://github.com/yyxyz/OSOperateSkills/find/master)  <br>
+  <a href="https://github.com/yyxyz/OSOperateSkills/find/master"><span class="paths">https://github.com/yyxyz/OSOperateSkills/find/master</span></a>
+- [更纱黑体主仓库](https://github.com/be5invis/Sarasa-Gothic)  <br>
+  <a href="https://github.com/be5invis/Sarasa-Gothic"><span class="paths">https://github.com/be5invis/Sarasa-Gothic</span></a>
+- [Iosevka 字体主页](https://typeof.net/Iosevka/)  <br>
+  <a href="https://typeof.net/Iosevka/"><span class="paths">https://typeof.net/Iosevka/</span></a>
