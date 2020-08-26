@@ -257,7 +257,7 @@ VS Code 的应用商店中有着大量可以选择的扩展，主题和图标就
 
 Python 扩展安装完成，并找到系统中的 Python 环境后，通常就可以直接使用 VS Code 进行 Python 相关的工作了，更多的详细内容可以参考微软的相关教程[《Editing Python in Visual Studio Code》](https://code.visualstudio.com/docs/python/editing)（[Greg Van Liew](https://github.com/gregvanl) 等，2019-01-29）。
 
-### Flake8
+### Linter
 
 和许多语言不同，Python 要求严格的代码缩进对齐，这导致有的时候仅仅是多了一个空格，代码就出现问题。有些时候问题出得还相当隐蔽，比如这样一段代码：
 
@@ -270,7 +270,7 @@ Python 扩展安装完成，并找到系统中的 Python 环境后，通常就�
 在网页上看似乎没有什么问题，但贴到 VS Code 里就无法正常运行。它在 VS Code 里可能长这样：  
 ![制表符和空格对比](https://cdn.jsdelivr.net/gh/shen-huang/img@master/2019-08/Tab_and_Space_0.png)
 
-这里对齐出现了问题，这是由于代码编写时混用了制表符（<span class="unicode-number">U+0009</span> <span class="unicode-name">CHARACTER TABULATION</span>，即按 <kbd>Tab ↹</kbd> 键输出的字符）和空格（<span class="unicode-number">U+0020</span> <span class="unicode-name">SPACE</span>，即按 <kbd>Space</kbd> 键输出的字符）的缘故。
+这里对齐出现了问题，这是由于代码编写时混用了制表符（<span class="unicode-number">U+0009</span> <span class="unicode-name">CHARACTER TABULATION</span>，即按 <kbd>Tab</kbd> 键输出的字符）和空格（<span class="unicode-number">U+0020</span> <span class="unicode-name">SPACE</span>，即按 <kbd>Space</kbd> 键输出的字符）的缘故。
 
 这种情况在自己写代码的时候并不多见，VS Code 为了避免这种问题，特意在设置里默认把制表符替换成了空格（通过菜单 <span class="menutext">文件(F)</span> - <span class="menutext">首选项</span> - <span class="menutext">设置</span>，或按快捷键 <kbd>Ctrl</kbd> + <kbd>,</kbd> 就能看到）。但当我们从各种途径复制粘贴代码的时候，难免会把不同来源的代码混在一起，继而出现混用制表符和空格的问题。
 
@@ -290,16 +290,16 @@ Python 扩展安装完成，并找到系统中的 Python 环境后，通常就�
   <figcaption class="figtitle">“Python: 选择 Linter 插件”的可选列表</figcaption>
 </figure>
 
-其他插件各有长处，可以按需选择，选择后可能会弹出提示告知需要安装，根据提示操作即可，设定完成后也可以随时切换。我个人使用了分析内容相对更多的“[flake8](https://pypi.org/project/flake8/)”插件（除了语法检查外，还有代码风格检查）。
+其他插件各有长处，可以按需选择，选择后可能会弹出提示告知需要安装，根据提示操作即可，设定完成后也可以随时切换。我个人使用了分析内容相对更多的“[Flake8](https://pypi.org/project/flake8/)”插件（除了语法检查外，还有代码风格检查）。
 
 <figure class="image">
   <img src="https://cdn.jsdelivr.net/gh/shen-huang/img@master/2020-07/Visual_Studio_Code_Python_Select_Linter_list_flake8_Install.png" alt="flake8 Install"/>
-  <figcaption class="figtitle">flake8 安装提示</figcaption>
+  <figcaption class="figtitle">Flake8 安装提示</figcaption>
 </figure>
 
 <figure class="image">
   <img src="https://cdn.jsdelivr.net/gh/shen-huang/img@master/2020-07/Visual_Studio_Code_Python_Select_Linter_list_flake8_Install_successful.png" alt="flake8 Successfully installed"/>
-  <figcaption class="figtitle">flake8 安装完成</figcaption>
+  <figcaption class="figtitle">Flake8 安装完成</figcaption>
 </figure>
 
 <div class="commentary">
@@ -315,7 +315,7 @@ Python 扩展安装完成，并找到系统中的 Python 环境后，通常就�
 
 </div>
 
-启用了 flake8 插件后，这段代码出现了多处报错（显示为黄色和红色的波浪线）：  
+启用了 Flake8 插件后，这段代码出现了多处报错（显示为黄色和红色的波浪线）：  
 ![制表符和空格对比报错](https://cdn.jsdelivr.net/gh/shen-huang/img@master/2019-08/Tab_and_Space_1.png)
 
 混用了制表符和空格的代码，就算是看上去对齐了，也会报错：  
@@ -349,7 +349,7 @@ Markdown All in One 提供了许多基础编辑功能，如快捷键、自动生
 
 Markdown Preview Enhanced 提供了增强的即时预览、外部文件导入、多种格式导出、演示文稿生成、语法扩展、自定义样式、自动生成目录、<span class="texhtml" style="font-family: 'CMU Serif', cmr10, LMRoman10-Regular, 'Latin Modern Math', 'Nimbus Roman No9 L', 'Times New Roman', Times, serif;">L<span style="text-transform: uppercase; font-size: 57.851%; vertical-align: 0.205em; margin-left: -0.36em; margin-right: -0.15em; line-height: 0">a</span>T<span style="text-transform: uppercase; vertical-align: -0.2155em; margin-left: -0.125em; margin-right: -0.1667em; line-height: 0">e</span>X</span> 表达式渲染、多种类图形渲染等功能，官方还编写了相当完整的说明文档（[https://shd101wyy.github.io/markdown-preview-enhanced/#/zh-cn/](https://shd101wyy.github.io/markdown-preview-enhanced/#/zh-cn/)）以供参考。Markdown Preview Enhanced 强悍的地方更多地体现在本地编辑上，由于我现在主要是为了在 docsify 和 GitHub 上呈现内容而编写 Markdown 文档，故而我主要只用它来做侧边实时预览，并未使用其独有的特性功能。
 
-markdownlint 与前文提到的 Flake8 类似，是一款针对 Markdown 文档的静态程序分析工具，安装后其即会开始对打开的 Markdown 文档进行分析并用波形下划线（﹏）标记出有问题的地方，相关的具体说明可以参考官方主页（[https://github.com/DavidAnson/vscode-markdownlint](https://github.com/DavidAnson/vscode-markdownlint)）和规则说明页（[https://github.com/DavidAnson/markdownlint/blob/main/doc/Rules.md#md001](https://github.com/DavidAnson/markdownlint/blob/main/doc/Rules.md)）。默认的有些规则可能会带来一些麻烦，比如“[MD033 - 内联 HTML](https://github.com/DavidAnson/markdownlint/blob/main/doc/Rules.md#md033---inline-html)”就会标记出我为了语义正确而在 Markdown 文档中使用的所有 HTML 代码，这其实并无必要。为了对其进行个性化处理，可以点击侧边的<button class="btn gray mini">管理</button>按钮，再点击 <span class="menutext">设置</span>（或使用快捷键 <kbd>Ctrl</kbd> + <kbd>,</kbd>）打开设置页面，然后点击 <span class="menutext">扩展</span> - <span class="menutext">markdownlint</span>，再在页面右侧点击 <span class="menutext">在 settings.json 中编辑</span> 打开设置文件。
+markdownlint 与前文提到的 Flake8 类似，是一款针对 Markdown 文档的静态程序分析工具，安装后其即会开始对打开的 Markdown 文档进行分析并用波形下划线（﹏）标记出有问题的地方，相关的具体说明可以参考官方主页（[https://github.com/DavidAnson/vscode-markdownlint](https://github.com/DavidAnson/vscode-markdownlint)）和规则说明页（[https://github.com/DavidAnson/markdownlint/blob/main/doc/Rules.md](https://github.com/DavidAnson/markdownlint/blob/main/doc/Rules.md)）。默认的有些规则可能会带来一些麻烦，比如“[MD033 - 内联 HTML](https://github.com/DavidAnson/markdownlint/blob/main/doc/Rules.md#md033---inline-html)”就会标记出我为了语义正确而在 Markdown 文档中使用的所有 HTML 代码，这其实并无必要。要避免这些额外的提示，可以对其进行个性化处理：点击侧边的<button class="btn gray mini">管理</button>按钮，再点击 <span class="menutext">设置</span>（或使用快捷键 <kbd>Ctrl</kbd> + <kbd>,</kbd>）打开设置页面，然后点击 <span class="menutext">扩展</span> - <span class="menutext">markdownlint</span>，再在页面右侧点击 <span class="menutext">在 settings.json 中编辑</span> 打开设置文件。
 
 我在设置文件中添加了如下内容，基本上略过了我现在可能遇到的非必要报错：
 
@@ -361,6 +361,12 @@ markdownlint 与前文提到的 Flake8 类似，是一款针对 Markdown 文档�
     "MD034": false,
 },
 ```
+
+Code Spell Checker 提供了针对多种语言的“拼写检查”。将它启用后，可能是错误的英文单词下面会出现波形下划线，将光标移到标记出的单词处，按快捷键 <kbd>Ctrl</kbd> + <kbd>.</kbd> 就会弹出上下文菜单，提示可能正确的拼写，如果是地名、人名类，被错误标记了的专有名词，还可以选择 <span class="menutext">Add: "wrongword" to user dictionary</span> 将其添加到“用户词典”（对所有文档有效），或选择 <span class="menutext">Add: "wrongword" to workspace dictionary</span> 将其添加到“工作区词典”（对现在工作区中的文档有效）。
+
+用户词典的设置在文件 <span class="paths">~\AppData\Roaming\Code\User\settings.json</span> 里，工作区词典的设置则在工作区的文件 <span class="paths">.vscode\settings.json</span> 里。我更倾向于将自定义的单词放在工作区词典，这样相对来说好控制影响范围，也便于备份。
+
+Code Spell Checker 还可以加载其他的专门词典，比如德语、法语、俄语等等，具体的设置可以参考[官方页面](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker)上的说明。
 
 <!-- TODO -->
 
