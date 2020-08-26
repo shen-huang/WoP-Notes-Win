@@ -222,7 +222,7 @@ VS Code 的应用商店中有着大量可以选择的扩展，主题和图标就
 
 ![Visual Studio Code 主题介绍][Visual_Studio_Code_Extensions_Theme_Preview]
 
-这些搜索结果是按照用户评价的综合得分排列的，所以开头列出的这些都值得一试，点击页面中绿色的<button class="btn green mini">Install</button>（或<button class="btn green mini">安装</button>按钮），即可安装主题。
+这些搜索结果是按照用户评价的综合得分排列的，所以开头列出的这些都值得一试，点击页面中绿色的<button class="btn green mini">安装</button>（或<button class="btn green mini">Install</button>）按钮，即可安装主题。
 
 安装完成后，点击 VS Code 左侧工具栏里的 <span class="menutext">管理</span> 按钮，再点击 <span class="menutext">颜色主题</span>（快捷键为先按 <kbd>Ctrl</kbd> + <kbd>K</kbd>，再按 <kbd>Ctrl</kbd> + <kbd>T</kbd>），会弹出对话框，使用 <kbd>↑</kbd> 和 <kbd>↓</kbd> 可以预览主题，点击即为选用。
 
@@ -251,7 +251,7 @@ VS Code 的应用商店中有着大量可以选择的扩展，主题和图标就
 
 安装它之前需要装好（至少一个）Python 环境，如果已经使用 Scoop 安装过 Python，就可以安装这个扩展了。
 
-它的安装方法和前文中语言包、主题、图标的安装类似，点击侧边的<button class="btn gray mini">扩展</button>按钮（快捷键 <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>X</kbd>）打开扩展面板，搜索“Python”就能看到，点击页面中绿色的<button class="btn green mini">Install</button>按钮，即可完成安装。后文中涉及的其他扩展的安装方法亦与此类似，故不再赘述。
+它的安装方法和前文中语言包、主题、图标的安装类似，点击侧边的<button class="btn gray mini">扩展</button>按钮（快捷键 <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>X</kbd>）打开扩展面板，搜索“Python”就能看到，点击页面中绿色的<button class="btn green mini">安装</button>（或<button class="btn green mini">Install</button>）按钮，即可完成安装。后文中涉及的其他扩展的安装方法亦与此类似，故不再赘述。
 
 ![Visual Studio Code Python 扩展][Visual_Studio_Code_Python_extension]
 
@@ -368,9 +368,18 @@ Code Spell Checker 提供了针对多种语言的“拼写检查”。将它启�
 
 Code Spell Checker 还可以加载其他的专门词典，比如德语、法语、俄语等等，具体的设置可以参考[官方页面](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker)上的说明。
 
+### Git
+
+[GitLens](https://marketplace.visualstudio.com/items?itemName=eamodio.gitlens) 是搭配 Git 使用的一个重要的 VS Code 扩展，它增强了 VS Code 内置的 Git 功能，提供了作者显示、修改跟踪、仓库概览、历史查询、提交比较、提交搜索等等的功能。GitLens 安装完成后会自动弹出设置页面，通常情况下保持默认状态就可以了，我根据自己的习惯，把 <span class="menutext">Dates & Times</span> 区的日期格式设成了 `YYYY-MM-DD HH:mm:ss`，短日期格式设成了 `YYYY-MM-DD`。
+
+GitLens 会在侧边添加一个自己的图标，点击之后会打开 GitLens 侧栏，在其中就可以方便地进行一系列的 Git 操作。GitLens 会主动提示文档的作者和修改时间，悬浮鼠标箭头还会弹出有着更详细内容的上下文菜单。
+
+更具体的介绍可以参考[官方页面](https://marketplace.visualstudio.com/items?itemName=eamodio.gitlens)上的说明。
+
+![Visual Studio Code GitLens 扩展][Visual_Studio_Code_GitLens]
+
 <!-- TODO -->
 
-<!-- ### GitLens -->
 <!-- ### Excel Viewer -->
 
 ## VS Code 的其他设置
@@ -421,6 +430,7 @@ https://marketplace.visualstudio.com/items?itemName=Spades.vs-picgo
 [Visual_Studio_Code_Python_extension]: https://cdn.jsdelivr.net/gh/shen-huang/img@master/2020-07/Visual_Studio_Code_Python_extension.png
 [Visual_Studio_Code_Python_Env]: https://cdn.jsdelivr.net/gh/shen-huang/img@master/2020-07/Visual_Studio_Code_Python_Env.png
 [Visual_Studio_Code_Python_Select_Linter]: https://cdn.jsdelivr.net/gh/shen-huang/img@master/2020-07/Visual_Studio_Code_Python_Select_Linter.png
+[Visual_Studio_Code_GitLens]: https://cdn.jsdelivr.net/gh/shen-huang/img@master/2020-07/Visual_Studio_Code_GitLens.png
 
 <!-- 
 https://cdn.jsdelivr.net/gh/shen-huang/img@master/2020-07/
