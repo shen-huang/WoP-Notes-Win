@@ -118,7 +118,7 @@ button[class*="btn"] {border: 0;}
 .btn-two.mini, 
 .btn-gradient.mini, 
 .btn-effect.mini {
-  padding: 1px 7px;  
+  padding: 0 7px 0 7px;  
   font-size: 1em;
 }
 .btn.block, 

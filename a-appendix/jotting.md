@@ -2,6 +2,151 @@
 
 这里是一些我在学习过程中“注意力漂移”的记录。
 
+## 2020-08-14
+
+<!-- TODO -->
+
+<!-- SVG 图片尺寸的修改，与 Windows Logo 有关 -->
+
+## 2020-08-13
+
+装了 Code Spell Checker 后报了一堆提示，基本上都是人名之类的，真正的拼写错误只有一处，还是我从其他地方引用来的内容。
+
+不管也挺难看的，就花了不少时间挨个处理了。
+
+相关的设置在工作区文件夹的 <span class="paths">.vscode\\settings.json</span> 中。主要包括
+
+```json
+{
+    "cSpell.ignoreWords": [ ],
+    "cSpell.words": [ ],
+}
+```
+
+`"cSpell.ignoreWords"` 用来存放忽略掉的单词，`"cSpell.words"` 用来存放自定义的单词。
+
+另外在 VS Code 的主配置中添加了字典相关的设置：
+
+```json
+{
+    "cSpell.language": "en, fonts",
+    "cSpell.languageSettings": [
+        { "languageId": "*", "dictionaries": ["fonts"] }
+    ],
+}
+```
+
+Code Spell Checker 还引起了 VS Code 访问 [githubusercontent.com](githubusercontent.com) 域失败的警报，启用全局代理也没能把警报消除，好在 Clash for Windows 提供了 HTTP 代理，在 VS Code 的设置里把代理设成“<span class="paths">http://127.0.0.1:7890</span>”后问题就解决了。
+
+**参考资料：**
+
+- [《为 Visual Studio Code PC 客户端设置代理》，Qianying，2020-04-09。](https://suiahae.me/Set-proxy-for-Visual-Studio-Code-on-Windows/)
+
+## 2020-08-12
+
+[前几天（2020-08-06）](/a-appendix/jotting?id=_2020-08-06)调试引用表现的时候，明确了一下语义问题，当时我读到了 [Bryan Braun 的论述](https://stackoverflow.com/a/44951884/13891206)（翻译摘录如下）：
+
+<figure class="quote">
+  <!-- <blockquote style="letter-spacing: 0rem;"> -->
+  <blockquote>
+  在 HTML 中给图片添加标题的正确方法是使用 <a href="http://html5doctor.com/the-figure-figcaption-elements/"><code>&lt;figure&gt;</code> 和 <code>&lt;figcaption&gt;</code> 标签</a>。
+
+  Markdown 中没有与此等价的语法，所以如果只是偶尔添加个标题，建议直接在 Markdown 文档中插入相应的 HTML 代码。这一方案比折腾插件要简单得多。
+
+  如果试图用其他的 Markdown 功能（如表格、星号等）来制作标题，那只是在尝试绕过 Markdown 原本设计的使用方法罢了。  
+  </blockquote>
+</figure>
+
+在此之前，我通过使用
+
+```markdown
+![图片名称](图片地址)
+
+<div class="figtitle">图片标题</div>
+```
+
+的方式给图片添加了标题，效果虽然没有问题，语义上是不大经得起推敲的。今天又要插入带标题的图片，我就决定趁此机会把之前的图片相关代码都改掉。
+
+好在不大复杂，用正则表达式搜索
+
+```regex
+^!\[\]\[(.*)\]\n\n<div class="figtitle">(.*)</div>
+```
+
+替换成
+
+```regex
+<figure class="image">\n  <img src="https://cdn.jsdelivr.net/gh/shen-huang/img@master/2020-07/$1.png" alt="$2"/>\n  <figcaption class="figtitle">$2</figcaption>\n</figure>
+```
+
+就完成了。
+
+另外，之前标题区域由于单独把“来源”的文字设置成了浮动右对齐，会在页面较窄的情况下出现错误的漂浮换行现象，这次调整的时候通过在父元素的样式里设置 `overflow: auto;` 的方法把这个问题调整了一下。
+
+相关的完整规则集为：
+
+```css
+.figtitle {
+    position: relative;
+    overflow: auto;
+    z-index: 100;
+    margin-top: -0.5rem;
+    margin-bottom: 1rem;
+    margin-left: 0;
+    padding: 0 0 0 10px;
+    border-left: 5px solid rgba(0, 0, 0, 0.3);
+    background-color: #dddddd;
+    font-family: var(--font-hei);
+    font-size: 0.8rem;
+    font-weight: normal;
+    color: rgba(0, 0, 0, 0.7);
+}
+
+.figtitlevia {
+    float: right;
+    padding-right: 10px;
+}
+
+```
+
+
+## 2020-08-11
+
+[docsify][] 在对整段代码进行格式化的时候似乎会主动进行一些修订，比如把行首的制表符（<span class="unicode-number">U+0009</span> <span class="unicode-name">CHARACTER TABULATION</span>）自动替换成空格（<span class="unicode-number">U+0020</span> <span class="unicode-name">SPACE</span>），这在提升代码质量方面是有价值的，但在特意要搞错误示范的时候就带来了麻烦。
+
+我本想通过在一段 Python 代码中混用制表符和空格来说明“静态程序分析工具”的必要性，但像下面这样撰写代码无法如愿：
+
+<pre v-pre="" data-lang="markdown" class="language-markdown"><code class="lang-markdown language-markdown">```python
+if True:
+&#9;print("a")
+else:
+&#9;print("b")
+    print("c")
+```</code><button class="docsify-copy-code-button"><span class="label">点击复制</span><span class="error">错误</span><span class="success">已复制</span></button></pre>
+
+成型的网页上制表符都被替换成了空格，完全无法表达我原本的意思。
+
+我只好用浏览器的开发人员工具把 [PrismJS](https://prismjs.com) 处理过的 HTML 代码复制出来，然后用 `&#9;` 来实现在网页的代码区域呈现制表符的目的。类似这样：
+
+```html
+<pre v-pre="" data-lang="python" class="language-python">
+<code class="lang-python language-python">
+<span class="token keyword">if</span> <span class="token boolean">True</span><span class="token punctuation">:</span>
+&#9;<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"a"</span><span class="token punctuation">)</span>
+<span class="token keyword">else</span><span class="token punctuation">:</span>
+&#9;<span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"b"</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">"c"</span><span class="token punctuation">)</span>
+</code>
+<button class="docsify-copy-code-button">
+  <span class="label">点击复制</span>
+  <span class="error">错误</span>
+  <span class="success">已复制</span>
+</button>
+</pre>
+```
+
+<span class="commentary">注：由于这里使用了 `<pre>` 来格式化代码内容，而 `<pre>` 会保留空格和换行符，故而不能为了美观在 HTML 代码层面再搞什么标签对齐了。</span>
+
 ## 2020-08-07
 
 试了一下，感觉 [docsify][] 用来实现代码高亮的插件 [PrismJS](https://prismjs.com) 使用的关键字大小写不敏感，以往我看到它的[语言支持列表](https://prismjs.com/#supported-languages) 中列出来的关键字都是小写，就没敢用大写，今天用到 `HTML`，实在不习惯全小写的写法，就用了大写，发现可行，遂将所有的代码块关键字都改了一遍。
@@ -12,7 +157,7 @@
 ```(.*)\n
 ```
 
-替换成：
+将它们替换成：
 
 ```regex
 ```\L$1\n
@@ -20,11 +165,30 @@
 
 把代码块的关键字又改回来了。
 
+但最初闹心的事情还没有解决，我琢磨了一下，觉得如果这个位置没法做大小写区分的话，那我个人更偏好全大写，就在自定义的样式中添加了把代码标记显示成大写字母的规则：
+
+```css
+.markdown-section pre[data-lang]::after {
+    text-transform: uppercase;
+}
+```
+
+<span class="commentary">注：此处若使用 `text-transform: capitalize;` 把标记设置成首字母大写是不合适的，因为“HTML”、“CSS”、“RegEx”这样的名称，全小写尚可以说成是一种排版风格，写成“Html”、“Css”、“Regex”就显得有些不伦不类了。</span>
+
+又调了一下代码块的复制按钮，让它显得轻巧了一点：
+
+```css
+body .docsify-copy-code-button {
+    font-size: 0.8rem;
+    font-family: var(--code-font-family);
+}
+```
+
 ## 2020-08-06
 
 [docsify-themeable 主题][]中，引用默认的呈现方式是灰底左侧带主题色边框的一个块，类似这样——
 
-<div 
+<div
   style="
         overflow: visible;
         margin: 2em 0;
@@ -38,7 +202,7 @@
     <p>docsify-themeable 主题默认的引用表现</p>
 </div>
 
-在我对主题整体做了比较大的调整之后我觉得看上去不大协调，遂着手修改。
+在对主题整体做了比较大的调整之后，这个效果看上去感觉不大协调，遂着手修改。
 
 研究了一下现有的样式，明确引用实际上是用 `<blockquote>` 包起来的一个块，它的大部分属性都挺好理解的，只是其中有一个 `quotes` 我没看明白，就 Google 了一下“blockquote quotes”。我首先被 [Jake Rocheleau](https://jakerocheleau.com/) 在 2018 年 9 月 3 日发布的[《10 Simple CSS Snippets for Creating Beautiful Blockquotes》](https://1stwebdesigner.com/css-snippets-blockquotes/)一文吸引了，把文中所有的链接都点开看了一下，其中 Derek Wheelden 的 [Blockquote Patterns](https://codepen.io/frxnz/pen/IvBCr)、Harm Putman 的 [Simple Block](https://codepen.io/harmputman/pen/IpAnb)、Lukas Dietrich 的 [Raised Blockquote](https://codepen.io/lukasdietrich/pen/KLJjy) 都比较和我的心意，我就结合了 [Blockquote Patterns](https://codepen.io/frxnz/pen/IvBCr) 的第一个和第三个案例折腾了一阵子，弄出来了一个这样的效果——
 
@@ -61,14 +225,14 @@
 > <footer>及其<a href="#">来源</a></footer>
 ```
 
-跟着，我又读到了 [John Rhea](https://johnrhea.com/) 在 2019 年 12 月 10 日发布的[《Quoting in HTML: Quotations, Citations, and Blockquotes》](https://css-tricks.com/quoting-in-html-quotations-citations-and-blockquotes/)一文，其中详解了 `<blockquote>` 相关的各类用法，还强调了一个值得注意的事情：**语义**。按照该文的意见，使用 `<cite>` 来标记引文来源是不合语义的，`<cite>` [应该用来标明**作品**（如书籍，论文，文章，诗词，乐谱，歌曲，剧本，电影，电视节目，游戏，雕塑，画作，舞台剧，戏剧，歌剧，音乐剧，展览，法律案件报告​​，计算机程序等）的**标题**，而非作者](https://html.spec.whatwg.org/multipage/text-level-semantics.html#the-cite-element)。以此类推，`<footer>` [应该用来标记页脚](https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/footer)，用它来标记引文来源也不是很合适，[MDN Web Docs](https://developer.mozilla.org/zh-CN/) 里 `<blockquote>` 的[范例](https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/blockquote)也有问题。
+跟着，我又读到了 [John Rhea](https://johnrhea.com/) 在 2019 年 12 月 10 日发布的[《Quoting in HTML: Quotations, Citations, and Blockquotes》](https://css-tricks.com/quoting-in-html-quotations-citations-and-blockquotes/)一文，其中详解了 `<blockquote>` 相关的各类用法，还强调了一个值得注意的事情：**语义**。按照该文的意见，使用 `<cite>` 来标记引文来源是不合语义的，`<cite>` [应该用来标明**作品**（如书籍，论文，文章，诗词，乐谱，歌曲，剧本，电影，电视节目，游戏，雕塑，画作，舞台剧，戏剧，歌剧，音乐剧，展览，法律案件报告​​，计算机程序等）的**标题**，而非作者](https://html.spec.whatwg.org/multipage/text-level-semantics.html#the-cite-element)。以此类推，`<footer>` [应该用来标记页脚](https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/footer)，用它来标记引文来源也不是很合适，[MDN Web Docs](https://developer.mozilla.org/zh-CN/) 里 `<blockquote>` 的[范例](https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/blockquote)也有点问题。
 
 按照[《Quoting in HTML: Quotations, Citations, and Blockquotes》](css-tricks.com/quoting-in-html-quotations-citations-and-blockquotes/)中的建议，语义健康的引文标记应该采用这样的写法：
 
 ```html
 <figure class="quote">
   <blockquote>
-    But web browsers aren’t like web servers. If your back-end code is getting so big that it’s starting to run noticably slowly, you can throw more computing power at it by scaling up your server. That’s not an option on the front-end where you don’t really have one run-time environment—your end users have their own run-time environment with its own constraints around computing power and network connectivity.
+    But web browsers aren’t like web servers. If your back-end code is getting so big that it’s starting to run noticeably slowly, you can throw more computing power at it by scaling up your server. That’s not an option on the front-end where you don’t really have one run-time environment—your end users have their own run-time environment with its own constraints around computing power and network connectivity.
   </blockquote>
   <figcaption>
     &mdash; Jeremy Keith, <cite>Mental models</cite>
@@ -119,7 +283,7 @@
 </figure>
 ```
 
-好在 `<figure>` 和 `<blockquote>` 都不是块级元素，所以在其中夹杂 Markdown 语法也行得通，不过若是要给 `<figcaption>` 标记的来源加链接，就得用 `<a>` 来写了：
+好在 `<blockquote>` 都不是块级元素，所以在其中夹杂 Markdown 语法也行得通，不过若是要在 `<figure>` 里直接写内容或者是给 `<figcaption>` 标记的来源加链接，就得直接用 HTML 标签来写了：
 
 ```markdown
 <figure class="quote">
@@ -149,8 +313,9 @@
   </figcaption>
 </figure>
 ```
-<span class="commentary">注：本段代码出现了两层 <code>&grave;​&grave;​&grave;</code> 的嵌套，不处理的话会出现错误，为了令其正常显示，在内层 <code>&grave;​&grave;​&grave;</code> 的字符间插入了[零宽空格](https://zh.wikipedia.org/zh-hans/零宽空格)（<span class="unicode-number">U+200B</span> <span class="unicode-name">ZERO WIDTH SPACE</span>）。</span>
 
+<span class="commentary">注：本段代码出现了两层 <code>&grave;​&grave;​&grave;</code> 的嵌套，不处理的话会出现错误，为了令其正常显示，在内层 <code>&grave;​&grave;​&grave;</code> 的字符间插入了[零宽空格](https://zh.wikipedia.org/zh-hans/零宽空格)（<span class="unicode-number">U+200B</span> <span class="unicode-name">ZERO WIDTH SPACE</span>）。<br>
+另外，想要给三个抑音符（<span class="unicode-number">U+0060</span> &grave;​ <span class="unicode-name">GRAVE ACCENT</span>）添加代码样式也是个麻烦事，因为不能直接写“<code>&grave;​&grave;​&grave;&grave;​&grave;</code>”，它显示出来会是“`````”这样，这里只靠 Markdown 是搞不定的，得直接用 HTML，写成 <code>&lt;code&gt;&amp;grave;​&amp;grave;​&amp;grave;&lt;/code&gt;</code> 才行。</span>
 
 它呈现出来是这个样子：
 
@@ -194,11 +359,11 @@
 
 被点名了，于是写了挺长的一个回答，解释我为什么买了[三星 48.8英寸 曲面超宽显示器 C49RG90SSC](https://www.samsung.com/cn/monitors/monitor-c49rg90ssc/)。
 
-**今日话题: #让你感到显著提升工作效率(或生活质量)的物品#**
+<strong>今日话题: #让你感到显著提升工作效率(或生活质量)的物品#</strong>
 
 我来分享一个我近期部署的好物：三星 48.8英寸 曲面超宽显示器 C49RG90SSC。
 
-![](https://images.samsung.com/is/image/samsung/cn-feature-monitor-c49rg90ssc-153239166)
+![三星 48.8英寸 曲面超宽显示器 C49RG90SSC](https://images.samsung.com/is/image/samsung/cn-feature-monitor-c49rg90ssc-153239166)
 
 我大概从 2010 年开始使用双屏工作，一用就停不下来了——更多的屏幕面积减少了在可能的多个任务间的切换次数，从而明显地提升了效率。
 
@@ -245,7 +410,7 @@
 
 做了一系列功课，又关注了一阵子价格，我在一个购物节入手了“三星 48.8英寸 曲面超宽显示器”。这台显示器宽 1199.5mm，高 369.4mm，屏幕比例 32:9，它其实就相当于两台 16:9 的 27 英寸显示器横向拼起来。我在下手前还纠结了一阵子：为什么不买两台 27 英寸的显示器？最大的区别就是中间的那个缝，那个缝很关键吗？到手之后我明确了答案：那个缝挺关键的，而且，并不只是那个缝的事。
 
-![](https://images.samsung.com/is/image/samsung/cn-monitor-c49rg90ssc-lc49rg90sscxxf-silver-153239098)
+![三星 48.8英寸 曲面超宽显示器 C49RG90SSC 正视图](https://images.samsung.com/is/image/samsung/cn-monitor-c49rg90ssc-lc49rg90sscxxf-silver-153239098)
 
 同样的面积，两台显示器会比一台多用一个显示输出端口，这在便携式计算机上挺重要的。操作系统对“两台显示器”的处理和“一台显示器”也不一样，在一台显示器上，窗口怎么拉伸都没问题，若是两台显示器，拉伸过那个“中缝”就比较麻烦。
 
@@ -362,7 +527,7 @@ kbd, .markdown-section kbd {
 
 另外明确了一下，不要使用“H5”来简称“HTML5”，细节可见 [JS小组](https://weibo.com/baidujs) 在 2015 年 7 月 5 日发布的[《为何不要用「h5」这个简称？》](https://mp.weixin.qq.com/s/AZ4gKhPRmIV2poHgURbVYA)一文。
 
-**参考资料**
+**参考资料：**
 
 - [Be careful what you copy: Invisibly inserting usernames into text with Zero-Width Characters. Tom Ross, 2018-04-03.](https://medium.com/@umpox/be-careful-what-you-copy-invisibly-inserting-usernames-into-text-with-zero-width-characters-18b4e6f17b66)  
   <a href="https://link.medium.com/zKcoNeBPy8"><span class="paths">https://medium.com/@umpox/be-careful-what-you-copy-invisibly-inserting-usernames-into-text-with-zero-width-characters-18b4e6f17b66</span></a>
@@ -387,7 +552,7 @@ kbd, .markdown-section kbd {
 <link href='https://fonts.loli.net/css?family=Open+Sans' rel='stylesheet'>
 ```
 
-我另外阅读了 Harry Roberts 在 2020 年 5 月 19 日撰写的《[最快的 Google Fonts](cloud.tencent.com/developer/news/643958)》（[*The Fastest Google Fonts*](https://csswizardry.com/2020/05/the-fastest-google-fonts/)）一文，Harry Roberts 经过了一系列的测试，建议使用如下代码段提升使用了 Google Fonts 的网页的性能：
+我另外阅读了 Harry Roberts 在 2020 年 5 月 19 日撰写的《[最快的 Google Fonts](https://cloud.tencent.com/developer/news/643958)（[The Fastest Google Fonts](https://csswizardry.com/2020/05/the-fastest-google-fonts/)）》一文，Harry Roberts 经过了一系列的测试，建议使用如下代码段提升使用了 Google Fonts 的网页的性能：
 
 ```html
 <!--
@@ -470,7 +635,7 @@ font-family: 'Noto Serif SC', serif;
 </noscript>
 ```
 
-**参考资料**
+**参考资料：**
 
 - [《前端 CDNJS 库及 Google Fonts、Ajax 和 Gravatar 国内加速服务》，郭秀峰，2018-08-18。](https://sb.sb/blog/css-cdn/)  
   <a href="https://sb.sb/blog/css-cdn/"><span class="paths">https://sb.sb/blog/css-cdn/</span></a>
@@ -513,7 +678,7 @@ GitHub 的原始链接是这样的：
 
 如果设置了 Release 的版本，还可以引用对应版本的文件。
 
-**参考资料**
+**参考资料：**
 
 - [《GitHub + jsDelivr + PicGo 打造稳定快速、高效免费图床》，TRHX，2019-08-01。](https://www.itrhx.com/2019/08/01/A27-image-hosting/)  
   <a href="https://www.itrhx.com/2019/08/01/A27-image-hosting/"><span class="paths">https://www.itrhx.com/2019/08/01/A27-image-hosting/</span></a>
@@ -528,7 +693,7 @@ GitHub 的原始链接是这样的：
 
 研究了一下 Jekyll、Hexo、Hugo，考虑将来用 Hugo 搭个 Blog。
 
-**参考资料**
+**参考资料：**
 
 - [《Jekyll / Hugo / Hexo 比较》，曹历鑫，2019-10-30。](https://lexcao.github.io/zh/posts/jekyll-hugo-hexo)  
   <a href="https://lexcao.github.io/zh/posts/jekyll-hugo-hexo"><span class="paths">https://lexcao.github.io/zh/posts/jekyll-hugo-hexo</span></a>
@@ -538,7 +703,7 @@ GitHub 的原始链接是这样的：
 <!-- 
 Fox.ONE 的大群机器人新增了视频直播回看的功能，我看了一下源代码，发现视频是 blob 加密的，好在可以直接打开开发工具、刷新页面、从 Network 分页里搜索“m3u8”找到原始链接，跟着用个 M3U8 的下载工具（我用的是稞麦）下载就行了。
 
-**参考资料**
+**参考资料：**
 
 - [《下载blob加密的视频以及m3u8下载姿势合集》，yamakuchi，2019-05-11。](https://zhuanlan.zhihu.com/p/65425801)  
   <a href="https://zhuanlan.zhihu.com/p/65425801"><span class="paths">https://zhuanlan.zhihu.com/p/65425801</span></a>
@@ -596,19 +761,22 @@ David Jonathan Ross 提出了
 ```
 
 过去放在 GitBook 上的笔记的库虽然已经删了，但本地文件的 Git 远程关联还在，这导致了一点混淆。在 Windows Terminal 里使用
+
 ```shell
 git remote remove origin
 ```
+
 移除了远程关联。
 
 如果需要添加远程关联，可以使用
+
 ```shell
 git remote add origin git@github.com:git_username/repository_name.git
 ```
 
 明确了“不忍卒读”和“难以卒读”的分别（前者褒义后者贬义）。
 
-**参考资料**
+**参考资料：**
 
 - [《CSS 世界》，张鑫旭，北京：人民邮电出版社，2017-12-01。](https://www.epubit.com/bookDetails?id=N2983)  
   <a href="https://www.epubit.com/bookDetails?id=N2983"><span class="paths">https://www.epubit.com/bookDetails?id=N2983</span></a>
@@ -643,11 +811,11 @@ git remote add origin git@github.com:git_username/repository_name.git
 
 在各种场景中可能会混用的中间点（<span class="unicode-number">U+00B7</span> <span class="unicode-symbol">·</span> <span class="unicode-name">MIDDLE DOT</span>）、连字点（<span class="unicode-number">U+2027</span> <span class="unicode-symbol">‧</span> <span class="unicode-name">HYPHENATION POINT</span>）、全宽句号（<span class="unicode-number">U+FF0E</span> <span class="unicode-symbol">．</span> <span class="unicode-name">FULLWIDTH FULL STOP</span>）、片假名中间点（<span class="unicode-number">U+30FB</span> <span class="unicode-symbol">・</span> <span class="unicode-name">KATAKANA MIDDLE DOT</span>）在不同字体下的呈现情况：
 
-[![](https://cdn.jsdelivr.net/gh/shen-huang/img@master/2020-07/4_dots.png)](https://d.pr/i/T3is)
+[![四种点状符号在不同字体中的对比](https://cdn.jsdelivr.net/gh/shen-huang/img@master/2020-07/4_dots.png)](https://d.pr/i/T3is)
 
 <div class="figtitle">中间点、连字点、全宽句号、片假名中间点在不同字体下的呈现情况<span>&nbsp;</span><span class="figtitlevia">来源：<a href="https://www.zhihu.com/question/20271115/answer/14565424">梁海</a></span></div>
 
-**参考资料**
+**参考资料：**
 
 - [《Git 教程・自定义 Git・忽略特殊文件》，廖雪峰，\[2020-07-26\]。](https://www.liaoxuefeng.com/wiki/896043488029600/900004590234208)  
   <a href="https://www.liaoxuefeng.com/wiki/896043488029600/900004590234208"><span class="paths">https://www.liaoxuefeng.com/wiki/896043488029600/900004590234208</span></a>
@@ -706,14 +874,14 @@ git remote add origin git@github.com:git_username/repository_name.git
 - 主题使用的颜色方案是 HSL，通过 [W3Schools][] 的 [Colors Tutorial](https://www.w3schools.com/colors/default.asp) 做了一系列的转换（主要是 RGB、HEX、HSL 间的），又通过 [Coolors][] 试了一些搭配。
 - 有些临时用一下的颜色标记，我犯懒就没调样式表，直接写进文字里了，为了代码上好看一点，使用了“HTML 颜色名”，参考了 [HTML Color Codes][] 提供的非常好用的 [HTML 颜色名工具](https://htmlcolorcodes.com/color-names/)。
 
-为了读写直观，参考[《创建漂亮的 CSS 按钮的 10 个代码片段》（Jake Rocheleau 著，IT程序狮子烨译，2017-03-06）](https://zhuanlan.zhihu.com/p/25597059)给 [docsify][] 加了按钮样式。
+为了读写直观，参考[《创建漂亮的 CSS 按钮的 10 个代码片段》](https://zhuanlan.zhihu.com/p/25597059)（Jake Rocheleau 著，IT程序狮子烨译，2017-03-06）给 [docsify][] 加了按钮样式。
 
 - 有些范例代码的样式和原本的样式冲突了，导致了意外的覆盖
-    - 想要调整一下内容区的宽度，按照原始设计，只要修改 `--content-max-width` 的定义就可以了，但怎么改都不生效
-    - 跟踪样式表，发现按钮样式里定义了 `.content` 的最大宽度，注释掉后正常了
+  - 想要调整一下内容区的宽度，按照原始设计，只要修改 `--content-max-width` 的定义就可以了，但怎么改都不生效
+  - 跟踪样式表，发现按钮样式里定义了 `.content` 的最大宽度，注释掉后正常了
 - 因为现有样式的影响，按钮样式并没有完全按预定效果呈现，不过现有的效果已经足够用了
 - 范例是用 `<a>` 来实现按钮的，实际用的时候改成了 `<button>`
-- 顺便调整了“键盘按键”（`<kbd>`）的表现，参考了 [*Nice effect with the KBD tag* \(Réal Gagnon, 2012-12-26\)](https://www.rgagnon.com/jsdetails/js-nice-effect-the-KBD-tag.html)、[*CSS for the new \<kbd\> style* \(Israel Galvez, 2012-05-05\)](https://meta.superuser.com/questions/4788/css-for-the-new-kbd-style)
+- 顺便调整了“键盘按键”（`<kbd>`）的表现，参考了[《Nice effect with the KBD tag》](https://www.rgagnon.com/jsdetails/js-nice-effect-the-KBD-tag.html)（Réal Gagnon, 2012-12-26）、[《CSS for the new \<kbd\> style》](https://meta.superuser.com/questions/4788/css-for-the-new-kbd-style)（Israel Galvez, 2012-05-05）
 
 每次向 GitHub 进行提交的时候，都要连着运行：
 
@@ -739,102 +907,122 @@ git add . ; git commit -m"说明" ; git push origin master
 然后事情就成了这样——
 
 - 在 GitHub 开个仓库写 <span class="paths">README.md</span> 可能就行了
-    - 页面会拉得太长
-    - 检索不够方便
-    - 写到一半的部分放在那里不好看
+  - 页面会拉得太长
+  - 检索不够方便
+  - 写到一半的部分放在那里不好看
 - 找个和 GitHub 联动的发布工具，[GitBook](https://www.gitbook.com/) 可能就行了
-    - GitBook 在 2018 年改了版，新版没有了引入自有样式的功能
-    - GitBook 现在免费的“空间”数量非常有限，这显然是受到了 GitBook 商业化运营的影响
-    - 网上大量 GitBook 的资讯现在都已经严重过时，新版的帮助文档也不够完整好用  
-      <span class="commentary">意味着我读相关资料的时间都失去价值了，其实我先看英文资料就会发现这些情况的，可惜……</span>
-    - GitBook 对样式的过滤和 GitHub 一样严格，连给文字加个颜色都没办法
+  - GitBook 在 2018 年改了版，新版没有了引入自有样式的功能
+  - GitBook 现在免费的“空间”数量非常有限，这显然是受到了 GitBook 商业化运营的影响
+  - 网上大量 GitBook 的资讯现在都已经严重过时，新版的帮助文档也不够完整好用  
+    <span class="commentary">意味着我读相关资料的时间都失去价值了，其实我先看英文资料就会发现这些情况的，可惜……</span>
+  - GitBook 对样式的过滤和 GitHub 一样严格，连给文字加个颜色都没办法
 - 放弃 GitBook，备份、删库，做了些功课后决定改用 [docsify][]  
   <span class="commentary">一个原因是李笑来老师现在在用 docsify 发布文章和书籍</span>
-    - 安装
-        - Node.js  
-          ```powershell
-          scoop install nodejs
-          ```
-        - npm
-            - `npm` 命令跑不起来，连 `node` 命令都跑不起来
-            - 检查了一下环境变量，看上去是好的
-            - 前几天 `npm` 还是正常的，不知道是不是 Scoop 更新的时候哪里出了意外
-            - Scoop 进行了一下更新，问题没有解决
-            - 做了做功课，决定先用 [Yarn](https://yarnpkg.com/) 完成工作
-        - Yarn  
-          ```powershell
-          scoop install yarn
-          ```
-            - 安装完后需要重启或另开 Windows Terminal 才能使用
-        - docsify  
-          ```powershell
-          yarn global add docsify-cli
-          ```
-            - 用 Yarn 安装 docsify 还是要用 `node` 命令，还是要解决 npm 那里的问题
-            - Scoop 做了一下自检  
-              ```powershell
-              scoop checkup
-              ```
-                - 3 个<span style="color: CORAL">警告</span> 1 个<span style="color: CRIMSON">错误</span>
-                    - 警告：Defender 可能会拖慢会中断安装进程，建议运行  
-                      ```powershell
-                      sudo Add-MpPreference -ExclusionPath 'C:\Users\[用户名]\scoop'
-                      ```
-                    - 警告：Defender 可能会拖慢会中断安装进程，建议运行  
-                      ```powershell
-                      sudo Add-MpPreference -ExclusionPath 'C:\ProgramData\scoop'
-                      ```
-                    - 警告：长路径支持未启用，建议运行  
-                      ```powershell
-                      Set-ItemProperty 'HKLM:\SYSTEM\CurrentControlSet\Control\FileSystem' -Name 'LongPathsEnabled' -Value 1
-                      ```
-                        - 因为这个命令要动注册表，所以直接运行可能会报“权限不足”的错误
-                        - 可以考虑用管理员身份运行一个 Windows Terminal 来执行命令
-                        - 也可以在指令前添加 `sudo ` 来一次性地调用管理员权限执行命令
-                    - 错误：Inno Setup Unpacker 未安装，其用来解包 InnoSetup 文件，请运行  
-                      ```powershell
-                      scoop install innounp
-                      ```
-            - 根据 Scoop 自检的建议，启用了长路径支持后，`node` 可以使用了
-    - 设置
-        - 在 GitHub 建立新库，克隆到本地
-        - 在本地使用  
-          ```powershell
-          docsify init [文件夹]
-          ```
-          初始化项目
-        - 运行  
-          ```powershell
-          docsify serve [文件夹]
-          ```
-          可启动一个本地服务器，实时预览效果，默认访问地址为 <a href="http://localhost:3000"><span class="paths">http://localhost:3000</span></a>
-        - 参考[docsify 官方文档][]（<a href="https://docsify.js.org/#/zh-cn/"><span class="paths">https://docsify.js.org/#/zh-cn/</span></a>）完成基础设置
-            - 添加侧边栏
-            - 添加插件
-                - 全文搜索
-                - emoji
-                - 外链脚本
-                - 图片缩放
-                - 复制到剪贴板
-                - 分页导航
-                - 代码高亮
-                    - 添加了 `bash`、`powershell`、`ini`、`python` 的语法支持
-                    - 顺带了解了一下 <span class="paths">.js</span> 和 <span class="paths">.min.js</span> 的分别：带“min”的是压缩过的 JavaScript 文件，体积更小，但不易读
-            - 使用 [docsify-themeable 主题][]
-                - 了解了一下 CSS 中 `:root` 和 `var()` 的用法
-                - 添加自定义的样式表
-                    - 重新定义了字体
-                    - 重新定义了颜色
-                    - 重新定义了页面宽度
-                    - 重新定义了“键盘按键”的表现
-                    - 新增了“路径”、“菜单”、“按钮”的表现
-    - 部署到 GitHub Pages
-        - 在仓库的 <span class="menutext">Settings</span> 页面的 <span class="menutext">GitHub Pages</span> 区域，把 <span class="menutext">Source</span> 改为了 <span class="menutext">master branch</span>
-        - 图片单独传到了 <span class="paths">img</span> 库里，方便管理和调用
-                
+  - 安装
+    - Node.js  
+
+      ```powershell
+      scoop install nodejs
+      ```
+
+    - npm
+      - `npm` 命令跑不起来，连 `node` 命令都跑不起来
+      - 检查了一下环境变量，看上去是好的
+      - 前几天 `npm` 还是正常的，不知道是不是 Scoop 更新的时候哪里出了意外
+      - Scoop 进行了一下更新，问题没有解决
+      - 做了做功课，决定先用 [Yarn](https://yarnpkg.com/) 完成工作
+    - Yarn  
+
+      ```powershell
+      scoop install yarn
+      ```
+
+      - 安装完后需要重启或另开 Windows Terminal 才能使用
+    - docsify  
+
+      ```powershell
+      yarn global add docsify-cli
+      ```
+
+      - 用 Yarn 安装 docsify 还是要用 `node` 命令，还是要解决 npm 那里的问题
+      - Scoop 做了一下自检  
+
+        ```powershell
+        scoop checkup
+        ```
+
+        - 3 个<span style="color: CORAL">警告</span> 1 个<span style="color: CRIMSON">错误</span>
+          - 警告：Defender 可能会拖慢会中断安装进程，建议运行  
+
+            ```powershell
+            sudo Add-MpPreference -ExclusionPath 'C:\Users\[用户名]\scoop'
+            ```
+
+          - 警告：Defender 可能会拖慢会中断安装进程，建议运行  
+
+            ```powershell
+            sudo Add-MpPreference -ExclusionPath 'C:\ProgramData\scoop'
+            ```
+
+          - 警告：长路径支持未启用，建议运行  
+
+            ```powershell
+            Set-ItemProperty 'HKLM:\SYSTEM\CurrentControlSet\Control\FileSystem' -Name 'LongPathsEnabled' -Value 1
+            ```
+
+            - 因为这个命令要动注册表，所以直接运行可能会报“权限不足”的错误
+            - 可以考虑用管理员身份运行一个 Windows Terminal 来执行命令
+            - 也可以在指令前添加 <code>sudo </code> 来一次性地调用管理员权限执行命令
+          - 错误：Inno Setup Unpacker 未安装，其用来解包 InnoSetup 文件，请运行  
+
+            ```powershell
+            scoop install innounp
+            ```
+
+      - 根据 Scoop 自检的建议，启用了长路径支持后，`node` 可以使用了
+  - 设置
+    - 在 GitHub 建立新库，克隆到本地
+    - 在本地使用  
+
+      ```powershell
+      docsify init [文件夹]
+      ```
+
+      初始化项目
+    - 运行  
+
+      ```powershell
+      docsify serve [文件夹]
+      ```
+
+      可启动一个本地服务器，实时预览效果，默认访问地址为 <a href="http://localhost:3000"><span class="paths">http://localhost:3000</span></a>
+    - 参考[docsify 官方文档][]（<a href="https://docsify.js.org/#/zh-cn/"><span class="paths">https://docsify.js.org/#/zh-cn/</span></a>）完成基础设置
+      - 添加侧边栏
+      - 添加插件
+        - 全文搜索
+        - emoji
+        - 外链脚本
+        - 图片缩放
+        - 复制到剪贴板
+        - 分页导航
+        - 代码高亮
+          - 添加了 `bash`、`powershell`、`ini`、`python` 的语法支持
+          - 顺带了解了一下 <span class="paths">.js</span> 和 <span class="paths">.min.js</span> 的分别：带“min”的是压缩过的 JavaScript 文件，体积更小，但不易读
+      - 使用 [docsify-themeable 主题][]
+        - 了解了一下 CSS 中 `:root` 和 `var()` 的用法
+        - 添加自定义的样式表
+          - 重新定义了字体
+          - 重新定义了颜色
+          - 重新定义了页面宽度
+          - 重新定义了“键盘按键”的表现
+          - 新增了“路径”、“菜单”、“按钮”的表现
+  - 部署到 GitHub Pages
+    - 在仓库的 <span class="menutext">Settings</span> 页面的 <span class="menutext">GitHub Pages</span> 区域，把 <span class="menutext">Source</span> 改为了 <span class="menutext">master branch</span>
+    - 图片单独传到了 <span class="paths">img</span> 库里，方便管理和调用
+
 可以暂时踏实写笔记了，不过现在很多样式是用 `<span>` 硬写进去的，这些内容在 Markdown 文档里有点“扎眼”，这个其实可以通过给 docsify 内置的 Markdown 解析器 [marked](https://github.com/markedjs/marked) 添加自定义规则进行改善，但这又是另外一大套功课，今天就先算了。
 
-**参考资料**
+**参考资料：**
 
 - [《基于Github Pages + docsify，我花了半天就搭建好了个人博客》，二营长，2020-01-05。](https://blog.csdn.net/m0_37965018/article/details/103841362)  
   <a href="https://blog.csdn.net/m0_37965018/article/details/103841362"><span class="paths">https://blog.csdn.net/m0_37965018/article/details/103841362</span></a>
@@ -859,13 +1047,13 @@ git add . ; git commit -m"说明" ; git push origin master
 
 ## 2020-07-14
 
-用了两天多的时间做功课，参考[《GitBook 教程（小白入坑 GitBook 全过程）》（Broken故城，2020-02-20）](https://www.jianshu.com/p/0388d8bb49a7)、[《GitBook 使用教程》（yulilong，2019-01-21）](https://segmentfault.com/a/1190000017960359)，在 GitBook 新建了一个“Space”（<a href="https://shen-huang.gitbook.io/wop-notes-win/"><span class="paths">https://shen-huang.gitbook.io/wop-notes-win/</span></a>），关联到了 GitHub 仓库。
+用了两天多的时间做功课，参考[《GitBook 教程（小白入坑 GitBook 全过程）》](https://www.jianshu.com/p/0388d8bb49a7)（Broken故城，2020-02-20）、[《GitBook 使用教程》](https://segmentfault.com/a/1190000017960359)（yulilong，2019-01-21），在 GitBook 新建了一个“Space”（<a href="https://shen-huang.gitbook.io/wop-notes-win/"><span class="paths">https://shen-huang.gitbook.io/wop-notes-win/</span></a>），关联到了 GitHub 仓库。
 
 ## 2020-07-13
 
 为了在苹果 App Store 美国区买应用，完整地跑了一遍用信用卡在[苹果官网买电子版礼品卡](https://www.apple.com/shop/gift-cards)的流程，不必登录账号，直接用访客身份购买即可，地址要写美国免税州里的（只有 5 个：Alaska、Delaware、Montana、New Hampshire、Oregon，Alaska 和 Montana 可能还有潜在税收，尽量不要写这两个），用 [Fake Address Generator](https://www.fakeaddressgenerator.com/) 生成即可。
 
-**参考资料**
+**参考资料：**
 
 - [《通过购买礼品卡（Gift Cards）给美国 Apple ID 充值方法》，陈浩，2019-08-09](https://www.hurbai.com/iOS/182)  
   <a href="https://www.hurbai.com/iOS/182"><span class="paths">https://www.hurbai.com/iOS/182</span></a>
@@ -880,13 +1068,13 @@ git add . ; git commit -m"说明" ; git push origin master
 
 我首先想到的替代方案，是 GitBook。2015 年的时候李笑来老师用 GitBook 做了在线版本的[《把时间当作朋友（第 3 版）》](https://legacy.gitbook.com/book/xiaolai/ba-shi-jian-dang-zuo-peng-you/details)，当时还基于它搞了“知笔墨”（已停止运维，旧页面可以从互联网档案馆的[网站时光机相关快照](https://web.archive.org/web/20180806235112/http://www.zhibimo.com/explore/books)里查看），我也因此对 GitBook 有了些感性认识。
 
-完整地看了几遍[《GitBook 文档（中文版）》（Samy Pessé 等著，沈煜 译，2016-12-12）](https://chrisniael.gitbooks.io/gitbook-documentation/content/)，打算明后天着手正式搭建。
+完整地看了几遍[《GitBook 文档（中文版）》](https://chrisniael.gitbooks.io/gitbook-documentation/content/)（Samy Pessé 等著，沈煜 译，2016-12-12），打算明后天着手正式搭建。
 
 ## 2020-07-11
 
-为了醒目、好看，我以往记录快捷键的时候如果遇到“Windows 键”，可能会额外多贴一个小图来表示：<kbd>![Win][Windows_Logo_12px] Win</kbd>，今天发现维基百科的处理方式是借用字符“⊞”，写成<kbd>⊞ Win</kbd>，看上去也能接受，不失为一种处理方法。
+为了醒目、好看，我以往记录快捷键的时候如果遇到“Windows 键”，可能会额外多贴一个小图来表示：<kbd>![Win][Windows_Logo_12px] Win</kbd>，今天发现维基百科的处理方式是借用字符“⊞”，写成 <kbd>⊞ Win</kbd>，看上去也能接受，不失为一种处理方法。
 
-**参考资料**
+**参考资料：**
 
 - [Windows key, In *Wikipedia, the free encyclopedia*. Retrieved 2020-07-08.](https://en.wikipedia.org/wiki/Windows_key)  
   <a href="https://en.wikipedia.org/wiki/Windows_key"><span class="paths">https://en.wikipedia.org/wiki/Windows_key</span></a>
@@ -903,7 +1091,7 @@ Windows Terminal 对操作系统版本有要求（至少 18362.0，也就是 190
 
 我把系统转换成了 Windows 10 Pro，避开了 LTSC 的限制，但 VHDX 升级的限制没法绕过去。我只好在硬盘另外划分出来了一个分区，把 VHDX 的内容用分区复制的方式倒了进去，然后用这个新分区启动。启动、升级完成后，我想把这个系统再倒回 VHDX 里，用不同的分区复制的方式试验了数次，都无法启动，最终放弃了，决定就在这个用实体分区启动的 Windows 10 Pro 上完成课程的学习。
 
-**参考资料**
+**参考资料：**
 
 - [《将 Windows 10 LTSC 版转换为专业版激活，使用纯净无预装的 Windows 10》，王洪峰，2019-04-12。](https://wanghongfeng.cn/LTSC2019.html)  
   <a href="https://wanghongfeng.cn/LTSC2019.html"><span class="paths">https://wanghongfeng.cn/LTSC2019.html</span></a>
@@ -920,7 +1108,7 @@ Windows Terminal 对操作系统版本有要求（至少 18362.0，也就是 190
 
 我无奈之下提了个 Issue：“[无法在 macOS 的 Terminal 使用 `python` 指令调用 Python 3.7.x](https://github.com/neolee/wop-community/issues/88)”，经过一系列排查和尝试，最后靠强制建立软链接搞好了，但这应该也不是问题的根源，李骏老师最后说：因为现场很难还原，当时到底发生了什么已不可考，施主请放下吧……
 
-**参考资料**
+**参考资料：**
 
 - [《5 分钟让你明白“软链接”和“硬链接”的区别》，Cyandev，2016-07-08。](https://www.jianshu.com/p/dde6a01c4094)  
   <a href="https://www.jianshu.com/p/dde6a01c4094"><span class="paths">https://www.jianshu.com/p/dde6a01c4094</span></a>
@@ -943,7 +1131,7 @@ Windows Terminal 对操作系统版本有要求（至少 18362.0，也就是 190
 
 编辑 <span class="paths">.bash_profile</span> 文件可能会遇到麻烦（很多文档都教读者用 VIM 来做这事，对初学者真的……不够友好），这事可以用 Visual Studio Code（下简称 VS Code）来做，在 Terminal 里输入并运行 `code ~/.bash_profile` 就能用 VS Code 打开这个文件了。如果因为种种原因，还没装 VS Code，则可以在 Terminal 里输入并运行 `open ~/.bash_profile`，这样会使用 macOS 自带的“文本编辑”打开这个文件，编辑起来会比 VIM 容易上手一些。
 
-**参考资料**
+**参考资料：**
 
 - [《你明白 Shell、Bash 和 Zsh 等词的真正含义吗？》，阿德，2018-03-03。](https://zhuanlan.zhihu.com/p/34197680)  
   <a href="https://zhuanlan.zhihu.com/p/34197680"><span class="paths">https://zhuanlan.zhihu.com/p/34197680</span></a>
@@ -970,13 +1158,13 @@ Windows Terminal 对操作系统版本有要求（至少 18362.0，也就是 190
 
 想要搞一下 Windows Terminal 的美化，然后就陷入了巨量的选项之中。
 
-首先看到了[李欢](https://www.zhihu.com/people/lihuan123) 2020 年 4 月 27 日写的[《简单配置与美化 PowerShell 和 Terminal》](https://zhuanlan.zhihu.com/p/104720872)，和 [Clint Richardson](https://twitter.com/clinterich) 2019 年 8 月 2 日写的[《*The New Windows Terminal – Install, Interact, and Customize*》](https://www.appliedis.com/the-new-windows-terminal-install-interact-and-customize/)。
+首先看到了[李欢](https://www.zhihu.com/people/lihuan123) 2020 年 4 月 27 日写的[《简单配置与美化 PowerShell 和 Terminal》](https://zhuanlan.zhihu.com/p/104720872)，和 [Clint Richardson](https://twitter.com/clinterich) 2019 年 8 月 2 日写的[《The New Windows Terminal – Install, Interact, and Customize》](https://www.appliedis.com/the-new-windows-terminal-install-interact-and-customize/)。
 
-跟着研究了一下 [posh-git](https://github.com/dahlbyk/posh-git)，以及 [Windows Terminal Themes](https://atomcorp.github.io/themes/) 里让人眼花缭乱的主题配色，还参考了 [Thomas Maurer](https://www.thomasmaurer.ch/) 2020 年 6 月 14 日的相关推荐文章[《*My Windows Terminal Color Schemes*》](https://www.thomasmaurer.ch/2020/06/my-windows-terminal-color-schemes/)。
+跟着研究了一下 [posh-git](https://github.com/dahlbyk/posh-git)，以及 [Windows Terminal Themes](https://atomcorp.github.io/themes/) 里让人眼花缭乱的主题配色，还参考了 [Thomas Maurer](https://www.thomasmaurer.ch/) 2020 年 6 月 14 日的相关推荐文章[《My Windows Terminal Color Schemes》](https://www.thomasmaurer.ch/2020/06/my-windows-terminal-color-schemes/)。
 
-这些折腾完，就轮到了字体，用于代码的等宽字体其实有不少可选项，但一混上中文情况就不妙了，理想的情况是 1 个中文字宽等于 2 个英文字宽，中英文混杂的行也能够纵向对齐，实际上这很难准确实现。我试了民间自制的 YaHei Consolas Hybrid（微软雅黑和 Consolas 的混合字体）、Microsoft Yahei Mono（也是微软雅黑和 Consolas 的混合字体）、Yahei Source Code Pro（微软雅黑和 Source Code Pro 的混合字体），都对不齐。专门用于这一目的制作的“等距更纱黑体”，对齐倒是很完美，但英文部分实在是显得太窄了，看着累人，最后我选择了保持原状，将来再折腾吧…… 
+这些折腾完，就轮到了字体，用于代码的等宽字体其实有不少可选项，但一混上中文情况就不妙了，理想的情况是 1 个中文字宽等于 2 个英文字宽，中英文混杂的行也能够纵向对齐，实际上这很难准确实现。我试了民间自制的 YaHei Consolas Hybrid（微软雅黑和 Consolas 的混合字体）、Microsoft Yahei Mono（也是微软雅黑和 Consolas 的混合字体）、Yahei Source Code Pro（微软雅黑和 Source Code Pro 的混合字体），都对不齐。专门用于这一目的制作的“等距更纱黑体”，对齐倒是很完美，但英文部分实在是显得太窄了，看着累人，最后我选择了保持原状，将来再折腾吧……
 
-**参考资料**
+**参考资料：**
 
 - [《美化 Windows Terminal（iTerm2-Color-Schemes)》，Jioho_chen，2019-09-08。](https://blog.csdn.net/Jioho_chen/article/details/100624029)  
   <a href="https://blog.csdn.net/Jioho_chen/article/details/100624029"><span class="paths">https://blog.csdn.net/Jioho_chen/article/details/100624029</span></a>
@@ -1011,7 +1199,7 @@ Windows Terminal 对操作系统版本有要求（至少 18362.0，也就是 190
 
 将这两个软件卸载并启用 Windows 10 自带的 Defender 后，问题解决。
 
-**参考资料**
+**参考资料：**
 
 - [《联想杀毒 PLUS》，wildtree23，2020-06-05。](https://bbs.kafan.cn/thread-2183667-1-1.html)  
   <a href="https://bbs.kafan.cn/thread-2183667-1-1.html"><span class="paths">https://bbs.kafan.cn/thread-2183667-1-1.html</span></a>
@@ -1032,7 +1220,7 @@ Version 7 Unix 系统还给出了“次要提示符”“`>`”，我们可以�
 
 除了 `$`、`%`、`>` 之外，`#` 也在某些情况下被用作提示符，可以想见，其实任何“尽量简短”且“不易混淆”的符号在这个上下文中都是合理的，我们现在看到的境况，与其说是有意的设计，不如说是历史的选择，而这种选择，有着各种各样的机缘和巧合。
 
-**参考资料**
+**参考资料：**
 
 - [What is the origin of the UNIX $ (dollar) prompt? Max Howell, 2009-10-19.](https://superuser.com/questions/57575/what-is-the-origin-of-the-unix-dollar-prompt)  
   <a href="https://superuser.com/questions/57575/what-is-the-origin-of-the-unix-dollar-prompt"><span class="paths">https://superuser.com/questions/57575/what-is-the-origin-of-the-unix-dollar-prompt</span></a>
@@ -1066,13 +1254,14 @@ Version 7 Unix 系统还给出了“次要提示符”“`>`”，我们可以�
     - 为了升级，我把系统转换成了 Windows 10 Pro，但因为之前为了方便维护，我是从 VHDX 启动的系统，这样的系统没法进行大版本升级
     - 在硬盘另外划分出来了一个分区，把 VHDX 的内容用分区复制的方式倒了进去，然后用这个新分区启动
     - 启动、升级完成后，我想把这个系统再倒回 VHDX 里，用不同的分区复制的方式试验了数次，都无法启动，最终放弃了 -->
+
 - Scoop 安装的时候要访问 [raw.githubusercontent.com](raw.githubusercontent.com)，这可能遭遇各种网络问题
-    - 改本地 hosts 无效
-    - 修改 DNS 服务器设置无效
-    - Windows Terminal 是个 UWP 应用，默认没法加本地代理，最后用 Clash for Windows 带的 AppContainer Loopback Exemption Utility（又称 UWP Loopback Helper）给它加上了代理
+  - 改本地 hosts 无效
+  - 修改 DNS 服务器设置无效
+  - Windows Terminal 是个 UWP 应用，默认没法加本地代理，最后用 Clash for Windows 带的 AppContainer Loopback Exemption Utility（又称 UWP Loopback Helper）给它加上了代理
 - Homebrew 的安装遇到了和 Scoop 一样的网络问题
-    - 可以用 `export` 命令给 Terminal 设置代理
-    - 为了将来方便，把代理设置写入了 <span class="paths">~/.bash_profile</span>
+  - 可以用 `export` 命令给 Terminal 设置代理
+  - 为了将来方便，把代理设置写入了 <span class="paths">~/.bash_profile</span>
 
 <!-- 
 - 在 macOS 上为 `python` 建立软链接的时候怎么都无法生效
