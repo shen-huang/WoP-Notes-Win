@@ -378,9 +378,8 @@ GitLens 会在侧边添加一个自己的图标，点击之后会打开 GitLens 
 
 ![Visual Studio Code GitLens 扩展][Visual_Studio_Code_GitLens]
 
-<!-- TODO -->
-
 <!-- ### Excel Viewer -->
+
 
 ## VS Code 的其他设置
 
@@ -390,8 +389,10 @@ GitLens 会在侧边添加一个自己的图标，点击之后会打开 GitLens 
 
 ![Visual Studio Code Python 环境设置][Visual_Studio_Code_Python_Env]
 
+### VS Code 中的代理设置
+
+
 <!-- ### VS Code 中 Terminal 的选择设置 -->
-<!-- ### VS Code 中的代理设置 -->
 
 <!-- 
 PicGo
